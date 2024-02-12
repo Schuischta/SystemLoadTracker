@@ -157,7 +157,6 @@ namespace SystemLoadTracker
             // Verwende DirectX, um die Gesamtkapazität des VRAM zu erhalten
             long vramTotal = GetTotalVRAM();
 
-            Console.WriteLine($"VRAM Total: {vramTotal / 1024.0 / 1024.0} MB");
 
             foreach (var sensor in gpu.Sensors)
             {
