@@ -9,6 +9,14 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>SLT_icon.ico</ApplicationIcon>
   </PropertyGroup>
+  
+  
+  <PropertyGroup>
+  <PublishSingleFile>true</PublishSingleFile>
+  <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+  <SelfContained>false</SelfContained>
+</PropertyGroup>
+
 
   <ItemGroup>
     <None Remove="SLT_icon.png" />
