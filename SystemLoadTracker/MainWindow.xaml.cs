@@ -1,10 +1,10 @@
-﻿using System.Windows;
+﻿using LibreHardwareMonitor.Hardware;
+using SharpDX.Direct3D11;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
-using LibreHardwareMonitor.Hardware;
-using SharpDX.Direct3D11;
 
 namespace SystemLoadTracker
 {
