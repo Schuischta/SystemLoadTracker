@@ -3,6 +3,7 @@ using SharpDX.Direct3D11;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
 
@@ -29,6 +30,7 @@ namespace SystemLoadTracker
             SetupTimer();
 
             totalVram = GetTotalVRAM();
+
         }
 
         // Initializes the computer object for hardware monitoring
