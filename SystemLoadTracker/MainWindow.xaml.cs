@@ -21,6 +21,8 @@ namespace SystemLoadTracker
         private int lastVramLoadValue = -1;
         private int lastRamLoadValue = -1;
 
+        private long totalVram;
+
         public MainWindow()
         {
             computer = new Computer();
@@ -28,6 +30,8 @@ namespace SystemLoadTracker
             InitializeComponent();
             InitializeComputer();
             SetupTimer();
+
+            totalVram = GetTotalVRAM();
         }
 
         // Initializes the computer object for hardware monitoring
@@ -154,9 +158,6 @@ namespace SystemLoadTracker
             float gpuCoreLoad = 0;
             float vramUsed = 0;
 
-            // Verwende DirectX, um die Gesamtkapazität des VRAM zu erhalten
-            long vramTotal = GetTotalVRAM();
-
 
             foreach (var sensor in gpu.Sensors)
             {
@@ -165,7 +166,7 @@ namespace SystemLoadTracker
                     gpuCoreLoad = GetSensorValue(sensor);
                     UpdateProgressBar(labelGPUload, progressbarGPU, gpuCoreLoad, ref lastGpuLoadValue, "");
                 }
-                // Prüfe auf "GPU Memory Used" für NVIDIA oder "D3D Dedicated Memory Used" für AMD
+                // Check for "GPU Memory Used" for NVIDIA or "D3D Dedicated Memory Used" for AMD
                 else if (sensor.SensorType == SensorType.SmallData && (sensor.Name == "GPU Memory Used" || sensor.Name == "D3D Dedicated Memory Used"))
                 {
                     vramUsed = GetSensorValue(sensor);
@@ -176,10 +177,10 @@ namespace SystemLoadTracker
                 }
             }
 
-            if (vramTotal > 0)
+            if (totalVram > 0)
             {
-                // Berechne die VRAM-Nutzung basierend auf der Gesamtkapazität des VRAM und der bereits genutzten Menge
-                float vramUsage = (vramUsed / (vramTotal / 1024f / 1024f)) * 100; // Konvertiere vramTotal in MB
+                // Calculate VRAM usage based on the total capacity of the VRAM and the amount already used
+                float vramUsage = (vramUsed / (totalVram / 1024f / 1024f)) * 100; // Konvertiere vramTotal in MB
                 UpdateProgressBar(labelVRAM, progressbarVRAM, vramUsage, ref lastVramLoadValue, "");
             }
         }
