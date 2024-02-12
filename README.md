@@ -21,9 +21,8 @@ The System Load Tracker is a lightweight WPF application that monitors key syste
 
 ### From Releases
 1. Download the latest version of the app as a ZIP file from the [Releases Tab](https://github.com/Schuischta/SystemLoadTracker/releases) on this repository.
-2. Unzip the file into a folder of your choice.
-3. Ensure that `LibreHardwareMonitorLib.dll` is in the same folder as the unzipped `SystemLoadTracker.exe` file.
-4. Run the `SystemLoadTracker.exe` file to open the application.
+2. Unzip the file.
+3. Run the `SystemLoadTracker.exe` file to open the application.
 
 ## Contributing
 We welcome contributions! If you have suggestions or find issues, please open an issue or submit a pull request.
