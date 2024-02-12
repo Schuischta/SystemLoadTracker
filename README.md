@@ -11,7 +11,8 @@ The System Load Tracker is a lightweight WPF application that monitors key syste
 - **Customizable Interface:** Coming soon
 
 ## Screenshot
-![System Load Tracker](https://github.com/Schuischta/SystemLoadTracker/assets/35001838/e1849bc6-e1f9-45a4-aea1-a27215c6f8d8)
+
+![System Load Tracker](https://github.com/Schuischta/SystemLoadTracker/assets/35001838/175ee87f-c7fc-476c-8bb6-a8af6d464654)
 
 ## Requirements
 - .NET 8
