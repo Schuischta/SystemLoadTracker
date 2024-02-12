@@ -282,7 +282,7 @@ namespace SystemLoadTracker
         // UI event handlers for interaction
         private void CloseButton_MouseEnter(object sender, MouseEventArgs e)
         {
-            closeButton.Background = Brushes.IndianRed;
+            closeButton.Background = Brushes.Transparent;
         }
 
         private void CloseButton_MouseLeave(object sender, MouseEventArgs e)
