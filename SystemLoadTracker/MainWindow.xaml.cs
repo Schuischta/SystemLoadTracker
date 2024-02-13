@@ -314,6 +314,25 @@ namespace SystemLoadTracker
         }
 
 
+        private void settingsButton_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Settings secondWindow = new Settings();
+
+            secondWindow.ShowDialog();
+        }
+
+
+        private void settingsButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            settingsButton.Background = Brushes.Gray;
+        }
+
+        private void settingsButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            settingsButton.Background = Brushes.Transparent;
+        }
+
+
 
         private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
         {

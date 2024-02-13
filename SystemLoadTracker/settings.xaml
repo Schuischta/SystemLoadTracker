@@ -1,0 +1,32 @@
+﻿<Window x:Name="settings_window" x:Class="SystemLoadTracker.Settings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SystemLoadTracker"
+        mc:Ignorable="d"
+        
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+
+        TextOptions.TextRenderingMode="ClearType"
+        SnapsToDevicePixels="True"
+        
+        Title="settings" Height="500" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent" AllowsTransparency="True">
+
+    <Border CornerRadius="7" Background="#FF404040">
+
+        <Grid>
+            <Label x:Name="closeButton" Content="&#xE711;" Canvas.Left="278" Foreground="White" Height="22" Width="22" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Segoe Fluent Icons" Margin="578,0,0,0">
+                <Label.Style>
+                    <Style TargetType="Label">
+                        <EventSetter Event="MouseEnter" Handler="CloseButton_MouseEnter"/>
+                        <EventSetter Event="MouseLeave" Handler="CloseButton_MouseLeave"/>
+                        <EventSetter Event="MouseDown"  Handler="CloseButton_MouseDown"/>
+                    </Style>
+                </Label.Style>
+            </Label>
+
+        </Grid>
+
+    </Border>
+</Window>
