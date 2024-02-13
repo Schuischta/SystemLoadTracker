@@ -23,6 +23,14 @@ namespace SystemLoadTracker
 
         public MainWindow()
         {
+            this.Closing += MainWindow_Closing;
+
+            if (!double.IsNaN(Properties.Settings.Default.WindowTop))
+            {
+                this.Top = Properties.Settings.Default.WindowTop;
+                this.Left = Properties.Settings.Default.WindowLeft;
+            }
+
             computer = new Computer();
             timer = new DispatcherTimer();
             InitializeComponent();
@@ -304,6 +312,15 @@ namespace SystemLoadTracker
             {
                 DragMove();
             }
+        }
+
+
+
+        private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Properties.Settings.Default.WindowTop = this.Top;
+            Properties.Settings.Default.WindowLeft = this.Left;
+            Properties.Settings.Default.Save();
         }
 
     }

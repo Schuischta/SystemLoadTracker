@@ -10,7 +10,7 @@
         SnapsToDevicePixels="True"
         
         
-        Title="SystemLoadTracker" Height="189" Width="272" ResizeMode="NoResize" Background="Transparent" UseLayoutRounding="True" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Icon="/SLT_icon.png" MinWidth="300" MinHeight="200">
+        Title="SystemLoadTracker" Height="189" Width="272" ResizeMode="NoResize" Background="Transparent" UseLayoutRounding="True" WindowStyle="None" AllowsTransparency="True" Icon="/SLT_icon.png" MinWidth="300" MinHeight="200">
 
     <Border CornerRadius="10" Background="#FF404040">
 
@@ -86,11 +86,11 @@
             <Label x:Name="labelGPUtemperature" Content="Temp." Canvas.Left="208" Canvas.Top="98" Height="18" Width="43" Foreground="White" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,0,0,0" Grid.IsSharedSizeScope="True" FontSize="14"/>
             <Label x:Name="labelGPUvram" Content="VRAM" Canvas.Left="208" Canvas.Top="150" Height="20" Width="41" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0,0,0,0" FontSize="14"/>
             <Label x:Name="labelCPUload" Content="0%" Canvas.Left="9" Canvas.Top="75" Height="28" Width="50" Foreground="White" FontWeight="Bold" HorizontalContentAlignment="Center" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <Label x:Name="labelCPUtemp" Content="100°C" Canvas.Left="101" Canvas.Top="98" Height="20" Width="39" Foreground="White" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,0,0,0" FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="labelCPUtemp" Content="0°C" Canvas.Left="101" Canvas.Top="98" Height="20" Width="39" Foreground="White" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,0,0,0" FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <Label x:Name="labelGPUload" Content="0%" Canvas.Left="157" Canvas.Top="75" Height="28" Width="50" Foreground="White" FontWeight="Bold" HorizontalContentAlignment="Center" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <Label x:Name="labelRAM" Content="100%" Canvas.Left="101" Canvas.Top="150" Height="20" Width="39" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0,0,0,0" FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-            <Label x:Name="labelGPUtemp" Content="100°C" Canvas.Left="249" Canvas.Top="98" Height="20" Width="39" Foreground="White" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,0,0,0" FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-            <Label x:Name="labelVRAM" Content="100%" Canvas.Left="249" Canvas.Top="150" Height="20" Width="39" Foreground="White" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,0,0,0" FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="labelRAM" Content="0%" Canvas.Left="101" Canvas.Top="150" Height="20" Width="39" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0,0,0,0" FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="labelGPUtemp" Content="0°C" Canvas.Left="249" Canvas.Top="98" Height="20" Width="39" Foreground="White" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,0,0,0" FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="labelVRAM" Content="0%" Canvas.Left="249" Canvas.Top="150" Height="20" Width="39" Foreground="White" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,0,0,0" FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <Label x:Name="closeButton" Content="&#xE711;" Canvas.Left="278" Foreground="White" Height="22" Width="22" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Segoe Fluent Icons">
                 <Label.Style>
                     <Style TargetType="Label">
