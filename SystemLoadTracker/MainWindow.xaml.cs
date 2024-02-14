@@ -10,18 +10,22 @@ namespace SystemLoadTracker
 {
     public partial class MainWindow : Window
     {
-        private Computer computer;
-        private DispatcherTimer timer;
+        private const double UpdateIntervalSeconds = 1.0;
+
+        private readonly Computer computer;
+        private readonly DispatcherTimer timer;
 
         private int lastGpuLoadValue = -1;
         private int lastCpuLoadValue = -1;
         private int lastVramLoadValue = -1;
         private int lastRamLoadValue = -1;
 
-        private long totalVram;
+        private readonly long totalVram;
 
         public MainWindow()
         {
+            InitializeComponent();
+
             this.Closing += MainWindow_Closing;
 
             if (!double.IsNaN(Properties.Settings.Default.WindowTop))
@@ -30,27 +34,23 @@ namespace SystemLoadTracker
                 this.Left = Properties.Settings.Default.WindowLeft;
             }
 
-            computer = new Computer();
-            timer = new DispatcherTimer();
-            InitializeComponent();
-            InitializeComputer();
-            SetupTimer();
-
-            totalVram = GetTotalVRAM();
-
-            LoadWindowSettings();
-
-        }
-
-        // Initializes the computer object for hardware monitoring
-        private void InitializeComputer()
-        {
             computer = new Computer
             {
                 IsCpuEnabled = true,  // Enable CPU monitoring
                 IsGpuEnabled = true,  // Enable GPU monitoring
                 IsMemoryEnabled = true  // Enable RAM monitoring
             };
+
+            timer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(UpdateIntervalSeconds)
+            };
+            timer.Tick += Timer1_Tick;
+            timer.Start();
+
+            totalVram = GetTotalVRAM();
+
+            LoadWindowSettings();
 
             try
             {
@@ -62,17 +62,6 @@ namespace SystemLoadTracker
             }
         }
 
-        // Sets up the dispatcher timer for periodic UI updates
-        private void SetupTimer()
-        {
-            timer = new DispatcherTimer
-            {
-                Interval = TimeSpan.FromSeconds(1)
-            };
-            timer.Tick += Timer1_Tick;
-            timer.Start();
-        }
-
         // Load saved settings
         private void LoadWindowSettings()
         {
@@ -81,13 +70,11 @@ namespace SystemLoadTracker
             SetOpacity(Properties.Settings.Default.MainWindowOpacity);
         }
 
-
         // Sets the transparency
         public void SetOpacity(double opacity)
         {
             this.Opacity = opacity;
         }
-
 
         // Saves window position
         private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
@@ -96,7 +83,6 @@ namespace SystemLoadTracker
             Properties.Settings.Default.WindowLeft = this.Left;
             Properties.Settings.Default.Save();
         }
-
 
         // Timer tick event to refresh sensor values
         private void Timer1_Tick(object? sender, EventArgs e)
@@ -164,9 +150,7 @@ namespace SystemLoadTracker
             }
         }
 
-
         // Updates UI elements related to GPU
-
         private long GetTotalVRAM()
         {
             using (var device = new Device(SharpDX.Direct3D.DriverType.Hardware))
@@ -184,13 +168,10 @@ namespace SystemLoadTracker
             }
         }
 
-
-
         private void UpdateGpuUI(IHardware gpu)
         {
             float gpuCoreLoad = 0;
             float vramUsed = 0;
-
 
             foreach (var sensor in gpu.Sensors)
             {
@@ -213,15 +194,10 @@ namespace SystemLoadTracker
             if (totalVram > 0)
             {
                 // Calculate VRAM usage based on the total capacity of the VRAM and the amount already used
-                float vramUsage = (vramUsed / (totalVram / 1024f / 1024f)) * 100; // Konvertiere vramTotal in MB
+                float vramUsage = (vramUsed / (totalVram / 1024f / 1024f)) * 100; // Convert totalVram to MB
                 UpdateProgressBar(labelVRAM, progressbarVRAM, vramUsage, ref lastVramLoadValue, "");
             }
         }
-
-
-
-
-
 
         // Updates UI elements related to RAM
         private void UpdateMemoryUI(IHardware ram)
@@ -253,7 +229,6 @@ namespace SystemLoadTracker
             progressBar.Value = (int)value;
             label.Content = $"{labelPrefix}{value:N0}°C";
         }
-
 
         // Method to update clock speed for CPU and GPU
         private void UpdateClocks()
@@ -302,17 +277,11 @@ namespace SystemLoadTracker
             }
         }
 
-
-
-
         // Ensures proper resource release on window close
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
-            if (computer != null)
-            {
-                computer.Close();
-            }
+            computer.Close();
         }
 
         // UI event handlers for interaction
@@ -340,15 +309,12 @@ namespace SystemLoadTracker
             }
         }
 
-
         // Open the settings window
         private void settingsButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Settings secondWindow = new Settings(this.Opacity);
-
             secondWindow.ShowDialog();
         }
-
 
         private void settingsButton_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -359,6 +325,5 @@ namespace SystemLoadTracker
         {
             settingsButton.Background = Brushes.Transparent;
         }
-
     }
 }
