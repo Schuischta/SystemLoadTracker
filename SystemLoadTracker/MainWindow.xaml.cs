@@ -344,7 +344,7 @@ namespace SystemLoadTracker
         // Open the settings window
         private void settingsButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Settings secondWindow = new Settings();
+            Settings secondWindow = new Settings(this.Opacity);
 
             secondWindow.ShowDialog();
         }

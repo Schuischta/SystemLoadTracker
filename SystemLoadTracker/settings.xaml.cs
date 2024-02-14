@@ -17,11 +17,11 @@ namespace SystemLoadTracker
 {
     public partial class Settings : Window
     {
-        public Settings()
+        public Settings(double currentOpacity)
         {
             InitializeComponent();
 
-            transparencySlider.Value = Properties.Settings.Default.MainWindowOpacity;
+            transparencySlider.Value = currentOpacity;
         }
 
 
