@@ -6,8 +6,8 @@
         mc:Ignorable="d"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         
-        TextOptions.TextRenderingMode="ClearType"
-        SnapsToDevicePixels="True"
+        TextOptions.TextRenderingMode="Auto"
+        TextOptions.TextFormattingMode="Display"
         
         
         Title="SystemLoadTracker" Height="189" Width="272" ResizeMode="NoResize" Background="Transparent" UseLayoutRounding="True" WindowStyle="None" AllowsTransparency="True" Icon="/SLT_icon.png" MinWidth="300" MinHeight="200">
