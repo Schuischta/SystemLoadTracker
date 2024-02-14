@@ -39,6 +39,7 @@
             <Label Content="&#xE73E;" HorizontalAlignment="Left" Margin="447,102,0,0" VerticalAlignment="Top" FontSize="14" Foreground="White" FontFamily="Segoe Fluent Icons" Background="{x:Null}" BorderBrush="#FF737373" BorderThickness="2" Width="20" Height="20" Padding="0,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <Label Content="&#xE73E;" HorizontalAlignment="Left" Margin="447,132,0,0" VerticalAlignment="Top" FontSize="14" Foreground="White" FontFamily="Segoe Fluent Icons" Background="{x:Null}" BorderBrush="#FF737373" BorderThickness="2" Width="20" Height="20" Padding="0,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <Label Content="&#xE73E;" HorizontalAlignment="Left" Margin="447,162,0,0" VerticalAlignment="Top" FontSize="14" Foreground="White" FontFamily="Segoe Fluent Icons" Background="{x:Null}" BorderBrush="#FF737373" BorderThickness="2" Width="20" Height="20" Padding="0,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Slider x:Name="transparencySlider" HorizontalAlignment="Left" Margin="369,193,0,0" VerticalAlignment="Top" Width="120" IsSnapToTickEnabled="True" Minimum="0.1" Maximum="1" TickFrequency="0.2" SmallChange="0.2" ValueChanged="Slider_ValueChanged" Value="1"/>
 
 
 

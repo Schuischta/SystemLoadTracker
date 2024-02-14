@@ -38,6 +38,8 @@ namespace SystemLoadTracker
 
             totalVram = GetTotalVRAM();
 
+            LoadWindowSettings();
+
         }
 
         // Initializes the computer object for hardware monitoring
@@ -70,6 +72,31 @@ namespace SystemLoadTracker
             timer.Tick += Timer1_Tick;
             timer.Start();
         }
+
+        // Load saved settings
+        private void LoadWindowSettings()
+        {
+            this.Top = Properties.Settings.Default.WindowTop;
+            this.Left = Properties.Settings.Default.WindowLeft;
+            SetOpacity(Properties.Settings.Default.MainWindowOpacity);
+        }
+
+
+        // Sets the transparency
+        public void SetOpacity(double opacity)
+        {
+            this.Opacity = opacity;
+        }
+
+
+        // Saves window position
+        private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Properties.Settings.Default.WindowTop = this.Top;
+            Properties.Settings.Default.WindowLeft = this.Left;
+            Properties.Settings.Default.Save();
+        }
+
 
         // Timer tick event to refresh sensor values
         private void Timer1_Tick(object? sender, EventArgs e)
@@ -314,6 +341,7 @@ namespace SystemLoadTracker
         }
 
 
+        // Open the settings window
         private void settingsButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Settings secondWindow = new Settings();
@@ -330,15 +358,6 @@ namespace SystemLoadTracker
         private void settingsButton_MouseLeave(object sender, MouseEventArgs e)
         {
             settingsButton.Background = Brushes.Transparent;
-        }
-
-
-
-        private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
-        {
-            Properties.Settings.Default.WindowTop = this.Top;
-            Properties.Settings.Default.WindowLeft = this.Left;
-            Properties.Settings.Default.Save();
         }
 
     }

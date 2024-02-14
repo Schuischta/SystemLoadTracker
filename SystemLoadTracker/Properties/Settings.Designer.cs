@@ -46,5 +46,17 @@ namespace SystemLoadTracker.Properties {
                 this["WindowLeft"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double MainWindowOpacity {
+            get {
+                return ((double)(this["MainWindowOpacity"]));
+            }
+            set {
+                this["MainWindowOpacity"] = value;
+            }
+        }
     }
 }

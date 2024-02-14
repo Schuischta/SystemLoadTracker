@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 namespace SystemLoadTracker
 {
@@ -19,6 +20,8 @@ namespace SystemLoadTracker
         public Settings()
         {
             InitializeComponent();
+
+            transparencySlider.Value = Properties.Settings.Default.MainWindowOpacity;
         }
 
 
@@ -44,6 +47,17 @@ namespace SystemLoadTracker
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 DragMove();
+            }
+        }
+
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            var mainWindow = Application.Current.MainWindow as MainWindow;
+            if (mainWindow != null)
+            {
+                mainWindow.SetOpacity(e.NewValue);
+                Properties.Settings.Default.MainWindowOpacity = e.NewValue;
+                Properties.Settings.Default.Save();
             }
         }
     }
