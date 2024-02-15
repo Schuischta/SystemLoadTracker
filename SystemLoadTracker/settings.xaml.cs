@@ -14,6 +14,7 @@ namespace SystemLoadTracker
             opacitySlider.Value = currentOpacity;
             this.mainWindow = mainWindow;
 
+
             // Initialisieren Sie das Label basierend auf dem gespeicherten Zustand
             if (Properties.Settings.Default.FixedWindow)
             {
@@ -23,6 +24,10 @@ namespace SystemLoadTracker
             {
                 FixedWindowCheckbox.Content = "\uE73E"; // Das Icon
             }
+
+
+            // Initialize the label based on the saved setting
+            AlwaysOnTopCheckbox.Content = Properties.Settings.Default.AlwaysOnTop ? "\uE73E" : "";
         }
 
         // Changes the background color of the close button when the mouse enters
@@ -83,6 +88,18 @@ namespace SystemLoadTracker
             Properties.Settings.Default.Save();
 
         }
+
+
+        // Toggles the Always on Top setting
+        private void AlwaysOnTopCheckbox_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            mainWindow.ToggleAlwaysOnTop(); // Ändere den Zustand von Always on Top
+
+            // Aktualisiere den Inhalt des Labels, um den aktuellen Zustand widerzuspiegeln
+            AlwaysOnTopCheckbox.Content = Properties.Settings.Default.AlwaysOnTop ? "\uE73E" : "";
+        }
+
+
 
     }
 }

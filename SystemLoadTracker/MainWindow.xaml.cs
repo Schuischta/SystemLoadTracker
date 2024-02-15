@@ -28,6 +28,7 @@ namespace SystemLoadTracker
         {
             InitializeComponent();
 
+            // Set the window position
             this.Closing += MainWindow_Closing;
 
             if (!double.IsNaN(Properties.Settings.Default.WindowTop))
@@ -37,7 +38,13 @@ namespace SystemLoadTracker
             }
 
 
+            // Set the FixedWindow property based on the saved settings
             canMoveWindow = Properties.Settings.Default.FixedWindow;
+
+
+            // Set Topmost based on the saved setting
+            this.Topmost = Properties.Settings.Default.AlwaysOnTop; 
+
 
             computer = new Computer
             {
@@ -88,6 +95,17 @@ namespace SystemLoadTracker
             Properties.Settings.Default.WindowLeft = this.Left;
             Properties.Settings.Default.Save();
         }
+
+        // Sets the "Always on top" property
+        public void ToggleAlwaysOnTop()
+        {
+            bool isCurrentlyOnTop = Properties.Settings.Default.AlwaysOnTop;
+            this.Topmost = !isCurrentlyOnTop;
+            Properties.Settings.Default.AlwaysOnTop = !isCurrentlyOnTop;
+            Properties.Settings.Default.Save();
+        }
+
+
 
         // Timer tick event to refresh sensor values
         private void Timer1_Tick(object? sender, EventArgs e)
