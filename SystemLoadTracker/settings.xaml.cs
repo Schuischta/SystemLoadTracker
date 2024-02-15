@@ -6,10 +6,23 @@ namespace SystemLoadTracker
 {
     public partial class Settings : Window
     {
-        public Settings(double currentOpacity)
+
+        private MainWindow mainWindow;
+        public Settings(double currentOpacity, MainWindow mainWindow)
         {
             InitializeComponent();
             opacitySlider.Value = currentOpacity;
+            this.mainWindow = mainWindow;
+
+            // Initialisieren Sie das Label basierend auf dem gespeicherten Zustand
+            if (Properties.Settings.Default.FixedWindow)
+            {
+                FixedWindowCheckbox.Content = ""; // oder was auch immer der Standardinhalt ist
+            }
+            else
+            {
+                FixedWindowCheckbox.Content = "\uE73E"; // Das Icon
+            }
         }
 
         // Changes the background color of the close button when the mouse enters
@@ -50,5 +63,26 @@ namespace SystemLoadTracker
                 Properties.Settings.Default.Save();
             }
         }
+
+
+
+        private void FixedWindowCheckbox_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (mainWindow.canMoveWindow) // Wenn das Fenster bereits bewegt werden kann
+            {
+                mainWindow.DisableWindowMove(); // Fensterbewegung deaktivieren
+                FixedWindowCheckbox.Content = "\uE73E";
+            }
+            else
+            {
+                mainWindow.EnableWindowMove(); // Fensterbewegung aktivieren
+                FixedWindowCheckbox.Content = "";
+            }
+
+            Properties.Settings.Default.FixedWindow = mainWindow.canMoveWindow;
+            Properties.Settings.Default.Save();
+
+        }
+
     }
 }

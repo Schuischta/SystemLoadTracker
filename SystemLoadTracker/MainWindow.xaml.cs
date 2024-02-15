@@ -36,6 +36,9 @@ namespace SystemLoadTracker
                 this.Left = Properties.Settings.Default.WindowLeft;
             }
 
+
+            canMoveWindow = Properties.Settings.Default.FixedWindow;
+
             computer = new Computer
             {
                 IsCpuEnabled = true,  // Enable CPU monitoring
@@ -305,7 +308,7 @@ namespace SystemLoadTracker
         // Allows the window to be moved by dragging
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
+            if (e.LeftButton == MouseButtonState.Pressed && canMoveWindow)
             {
                 DragMove();
             }
@@ -314,7 +317,7 @@ namespace SystemLoadTracker
         // Open the settings window
         private void settingsButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Settings secondWindow = new Settings(this.Opacity);
+            Settings secondWindow = new Settings(this.Opacity, this);
             secondWindow.ShowDialog();
         }
 
@@ -327,5 +330,26 @@ namespace SystemLoadTracker
         {
             settingsButton.Background = Brushes.Transparent;
         }
+
+
+
+
+        // Settings
+
+
+        // Enables or disables window dragging
+
+        public bool canMoveWindow = true;
+
+        public void EnableWindowMove()
+        {
+            canMoveWindow = true;
+        }
+
+        public void DisableWindowMove()
+        {
+            canMoveWindow = false;
+        }
+
     }
 }

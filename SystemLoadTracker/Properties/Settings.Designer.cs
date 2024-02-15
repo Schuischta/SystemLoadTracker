@@ -58,5 +58,17 @@ namespace SystemLoadTracker.Properties {
                 this["MainWindowOpacity"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool FixedWindow {
+            get {
+                return ((bool)(this["FixedWindow"]));
+            }
+            set {
+                this["FixedWindow"] = value;
+            }
+        }
     }
 }
