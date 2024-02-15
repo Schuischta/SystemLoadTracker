@@ -28,6 +28,13 @@ namespace SystemLoadTracker
 
             // Initialize the label based on the saved setting
             AlwaysOnTopCheckbox.Content = Properties.Settings.Default.AlwaysOnTop ? "\uE73E" : "";
+
+
+            // Initialisieren Sie die Labels basierend auf der gespeicherten Einstellung
+            double currentInterval = Properties.Settings.Default.RefreshInterval;
+            RefreshTimeCheckbox05.Content = currentInterval == 0.5 ? "\uE73E" : "";
+            RefreshTimeCheckbox1.Content = currentInterval == 1.0 ? "\uE73E" : "";
+            RefreshTimeCheckbox2.Content = currentInterval == 2.0 ? "\uE73E" : "";
         }
 
         // Changes the background color of the close button when the mouse enters
@@ -98,6 +105,38 @@ namespace SystemLoadTracker
             // Aktualisiere den Inhalt des Labels, um den aktuellen Zustand widerzuspiegeln
             AlwaysOnTopCheckbox.Content = Properties.Settings.Default.AlwaysOnTop ? "\uE73E" : "";
         }
+
+
+
+
+        private void RefreshTimeCheckbox05_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            SetRefreshInterval(0.5);
+        }
+
+        private void RefreshTimeCheckbox1_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            SetRefreshInterval(1.0);
+        }
+
+        private void RefreshTimeCheckbox2_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            SetRefreshInterval(2.0);
+        }
+
+        private void SetRefreshInterval(double interval)
+        {
+            Properties.Settings.Default.RefreshInterval = interval;
+            Properties.Settings.Default.Save();
+
+            mainWindow.UpdateTimerInterval(interval); // Methode im MainWindow, um das Timer-Intervall zu aktualisieren
+
+            // Aktualisieren Sie die Inhalte der Labels, um die Auswahl widerzuspiegeln
+            RefreshTimeCheckbox05.Content = interval == 0.5 ? "\uE73E" : "";
+            RefreshTimeCheckbox1.Content = interval == 1.0 ? "\uE73E" : "";
+            RefreshTimeCheckbox2.Content = interval == 2.0 ? "\uE73E" : "";
+        }
+
 
 
 

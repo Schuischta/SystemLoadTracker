@@ -15,7 +15,7 @@ namespace SystemLoadTracker
         private const float VramConversionFactor = 1024f;
 
         private readonly Computer computer;
-        private readonly DispatcherTimer timer;
+        private DispatcherTimer timer;
 
         private int lastGpuLoadValue = -1;
         private int lastCpuLoadValue = -1;
@@ -27,6 +27,7 @@ namespace SystemLoadTracker
         public MainWindow()
         {
             InitializeComponent();
+            InitializeTimer();
 
             // Set the window position
             this.Closing += MainWindow_Closing;
@@ -53,12 +54,6 @@ namespace SystemLoadTracker
                 IsMemoryEnabled = true  // Enable RAM monitoring
             };
 
-            timer = new DispatcherTimer
-            {
-                Interval = TimeSpan.FromSeconds(UpdateIntervalSeconds)
-            };
-            timer.Tick += Timer1_Tick;
-            timer.Start();
 
             totalVram = GetTotalVRAM();
 
@@ -73,6 +68,26 @@ namespace SystemLoadTracker
                 MessageBox.Show($"Error initializing hardware monitoring: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+
+        private void InitializeTimer()
+        {
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(Properties.Settings.Default.RefreshInterval);
+            timer.Tick += Timer_Tick;
+            timer.Start();
+        }
+
+        public void UpdateTimerInterval(double interval)
+        {
+            if (timer != null)
+            {
+                timer.Interval = TimeSpan.FromSeconds(interval);
+            }
+        }
+
+
+
 
         // Load saved settings
         private void LoadWindowSettings()
@@ -108,7 +123,7 @@ namespace SystemLoadTracker
 
 
         // Timer tick event to refresh sensor values
-        private void Timer1_Tick(object? sender, EventArgs e)
+        private void Timer_Tick(object? sender, EventArgs e)
         {
             Task.Run(() =>
             {
