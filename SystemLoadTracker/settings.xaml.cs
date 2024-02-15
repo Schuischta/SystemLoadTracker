@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Diagnostics;
 
 namespace SystemLoadTracker
 {
@@ -20,22 +9,22 @@ namespace SystemLoadTracker
         public Settings(double currentOpacity)
         {
             InitializeComponent();
-
-            transparencySlider.Value = currentOpacity;
+            opacitySlider.Value = currentOpacity;
         }
 
-
-        // UI event handlers for interaction
+        // Changes the background color of the close button when the mouse enters
         private void CloseButton_MouseEnter(object sender, MouseEventArgs e)
         {
             closeButton.Background = Brushes.IndianRed;
         }
 
+        // Resets the background color of the close button when the mouse leaves
         private void CloseButton_MouseLeave(object sender, MouseEventArgs e)
         {
             closeButton.Background = Brushes.Transparent;
         }
 
+        // Closes the window when the close button is clicked
         private void CloseButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Close();
@@ -50,6 +39,7 @@ namespace SystemLoadTracker
             }
         }
 
+        // Changes the opacity of the main window when the slider value changes
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             var mainWindow = Application.Current.MainWindow as MainWindow;

@@ -12,6 +12,8 @@ namespace SystemLoadTracker
     {
         private const double UpdateIntervalSeconds = 1.0;
 
+        private const float VramConversionFactor = 1024f;
+
         private readonly Computer computer;
         private readonly DispatcherTimer timer;
 
@@ -194,7 +196,7 @@ namespace SystemLoadTracker
             if (totalVram > 0)
             {
                 // Calculate VRAM usage based on the total capacity of the VRAM and the amount already used
-                float vramUsage = (vramUsed / (totalVram / 1024f / 1024f)) * 100; // Convert totalVram to MB
+                float vramUsage = (vramUsed / (totalVram / VramConversionFactor / VramConversionFactor)) * 100; // Convert totalVram to MB
                 UpdateProgressBar(labelVRAM, progressbarVRAM, vramUsage, ref lastVramLoadValue, "");
             }
         }
