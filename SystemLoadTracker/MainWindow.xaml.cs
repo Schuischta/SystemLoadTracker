@@ -10,7 +10,6 @@ namespace SystemLoadTracker
 {
     public partial class MainWindow : Window
     {
-        private const double UpdateIntervalSeconds = 1.0;
 
         private const float VramConversionFactor = 1024f;
 
@@ -256,7 +255,7 @@ namespace SystemLoadTracker
             if ((int)value != lastValue)
             {
                 progressBar.Value = (int)value;
-                label.Content = $"{labelPrefix}{value:N0}%";
+                label.Content = $"{labelPrefix}{value:N0}";
                 lastValue = (int)value;
             }
         }
@@ -267,6 +266,7 @@ namespace SystemLoadTracker
             progressBar.Value = (int)value;
             label.Content = $"{labelPrefix}{value:N0}°C";
         }
+
 
         // Method to update clock speed for CPU and GPU
         private void UpdateClocks()
