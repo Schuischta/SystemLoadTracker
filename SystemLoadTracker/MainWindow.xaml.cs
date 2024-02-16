@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
+using System.Management;
 
 namespace SystemLoadTracker
 {
@@ -22,6 +23,7 @@ namespace SystemLoadTracker
         private int lastRamLoadValue = -1;
 
         private readonly long totalVram;
+        private readonly long totalRam;
 
         public MainWindow()
         {
@@ -55,6 +57,7 @@ namespace SystemLoadTracker
 
 
             totalVram = GetTotalVRAM();
+            totalRam = GetTotalRAM();
 
             LoadWindowSettings();
 
@@ -232,16 +235,25 @@ namespace SystemLoadTracker
             {
                 // Calculate VRAM usage based on the total capacity of the VRAM and the amount already used
                 float vramUsage = (vramUsed / (totalVram / VramConversionFactor / VramConversionFactor)) * 100; // Convert totalVram to MB
-                UpdateProgressBar(labelVRAM, progressbarVRAM, vramUsage, ref lastVramLoadValue, "");
+                UpdateProgressBar(labelVRAM, progressbarVRAM, vramUsage, ref lastVramLoadValue, "", totalVram);
             }
         }
 
         // Updates UI elements related to RAM
+
+        private long GetTotalRAM()
+        {
+            var cimObject = new ManagementObjectSearcher("SELECT * FROM Win32_ComputerSystem").Get().Cast<ManagementObject>().First();
+            return Convert.ToInt64(cimObject["TotalPhysicalMemory"]);
+        }
+
+
         private void UpdateMemoryUI(IHardware ram)
         {
             var loadSensor = ram.Sensors.FirstOrDefault(s => s.SensorType == SensorType.Load);
-            UpdateProgressBar(labelRAM, progressbarRAM, GetSensorValue(loadSensor), ref lastRamLoadValue, "");
+            UpdateProgressBar(labelRAM, progressbarRAM, GetSensorValue(loadSensor), ref lastRamLoadValue, "", totalRam);
         }
+
 
         // Retrieves the current value from a sensor, returns 0 if the sensor is null
         private float GetSensorValue(ISensor? sensor)
@@ -249,13 +261,23 @@ namespace SystemLoadTracker
             return sensor?.Value ?? 0;
         }
 
+
         // Updates the progress bar and label for load and temperature sensors
-        private void UpdateProgressBar(Label label, ProgressBar progressBar, float value, ref int lastValue, string labelPrefix)
+        private void UpdateProgressBar(Label label, ProgressBar progressBar, float value, ref int lastValue, string labelPrefix, long totalMemory = 0)
         {
             if ((int)value != lastValue)
             {
                 progressBar.Value = (int)value;
-                label.Content = $"{labelPrefix}{value:N0}";
+                if (totalMemory > 0)
+                {
+                    // Convert the value from percentage to GB
+                    float usedMemory = (value / 100) * totalMemory / (1024 * 1024 * 1024);
+                    label.Content = $"{labelPrefix}{usedMemory:N1} GB";
+                }
+                else
+                {
+                    label.Content = $"{labelPrefix}{value:N0}";
+                }
                 lastValue = (int)value;
             }
         }
