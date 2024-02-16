@@ -73,8 +73,8 @@
                     </TransformGroup>
                 </ProgressBar.RenderTransform>
             </ProgressBar>
-            <Label x:Name="labelCPU" Content="CPU" Canvas.Left="60" Canvas.Top="12" Height="28" Width="40" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontWeight="Bold" FontSize="20" Padding="0,0,0,0"/>
-            <Label x:Name="labelGPU" Content="GPU" Canvas.Left="208" Canvas.Top="12" Height="28" Width="42" Foreground="White" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,0,0,0" Grid.IsSharedSizeScope="True"/>
+            <Label x:Name="labelCPU" Content="CPU" Canvas.Left="60" Canvas.Top="12" Height="28" Width="48" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontWeight="Bold" FontSize="24" Padding="0,0,0,0"/>
+            <Label x:Name="labelGPU" Content="GPU" Canvas.Left="208" Canvas.Top="12" Height="28" Width="50" Foreground="White" FontWeight="Bold" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,0,0,0" Grid.IsSharedSizeScope="True"/>
             <Label x:Name="labelCpuClock" Content="0" Canvas.Left="60" Canvas.Top="39" Height="30" Width="75" Foreground="White" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Segoe UI" FontWeight="Bold" Padding="0,0,0,0" Grid.IsSharedSizeScope="True"/>
             <Label x:Name="labelCPUMHz" Content="MHz" Canvas.Left="60" Canvas.Top="61" Height="20" Width="32" Foreground="White" FontWeight="Bold" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,0,0,0" Grid.IsSharedSizeScope="True"/>
             <Label x:Name="labelGpuClock" Content="0" Canvas.Left="208" Canvas.Top="39" Height="28" Width="75" Foreground="White" FontWeight="Bold" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,0,0,0" Grid.IsSharedSizeScope="True"/>
@@ -111,6 +111,8 @@
             </Label>
             <Label x:Name="labelCPUloadPercent" Content="%" Canvas.Left="13" Canvas.Top="94" Height="30" Width="40" Foreground="White" FontWeight="Bold" HorizontalContentAlignment="Center" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             <Label x:Name="labelGPUloadPercent" Content="%" Canvas.Left="160" Canvas.Top="94" Height="30" Width="40" Foreground="White" FontWeight="Bold" HorizontalContentAlignment="Center" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Label x:Name="labelCPUwatts" Content="0 W" Canvas.Left="60" Canvas.Top="82" Height="20" Width="46" Foreground="White" Padding="0,0,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="14"/>
+            <Label x:Name="labelGPUwatts" Content="0 W" Canvas.Left="208" Canvas.Top="82" Height="20" Width="46" Foreground="White" Padding="0,0,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="14"/>
 
         </Canvas>
     </Border>

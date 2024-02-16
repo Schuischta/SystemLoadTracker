@@ -188,7 +188,16 @@ namespace SystemLoadTracker
             {
                 UpdateTemperature(labelCPUtemp, progressbarCPUtemp, tempSensor, "");
             }
+
+            // Search for power sensors
+            var powerSensorNames = new[] { "CPU Package", "Package" }; // List of sensor names to be searched
+            var powerSensor = cpu.Sensors.FirstOrDefault(s => s.SensorType == SensorType.Power && powerSensorNames.Contains(s.Name));
+            if (powerSensor != null)
+            {
+                labelCPUwatts.Content = $"{GetSensorValue(powerSensor):N1} W"; // Update CPU power label in the UI
+            }
         }
+
 
         // Updates UI elements related to GPU
         private long GetTotalVRAM()
@@ -236,6 +245,13 @@ namespace SystemLoadTracker
                 // Calculate VRAM usage based on the total capacity of the VRAM and the amount already used
                 float vramUsage = (vramUsed / (totalVram / VramConversionFactor / VramConversionFactor)) * 100; // Convert totalVram to MB
                 UpdateProgressBar(labelVRAM, progressbarVRAM, vramUsage, ref lastVramLoadValue, "", totalVram);
+            }
+
+            // Search for power sensors
+            var powerSensor = gpu.Sensors.FirstOrDefault(s => s.SensorType == SensorType.Power && s.Name == "GPU Package");
+            if (powerSensor != null)
+            {
+                labelGPUwatts.Content = $"{GetSensorValue(powerSensor):N1} W"; // Update GPU power label in the UI
             }
         }
 
