@@ -111,8 +111,8 @@
             </Label>
             <Label x:Name="labelCPUloadPercent" Content="%" Canvas.Left="13" Canvas.Top="94" Height="30" Width="40" Foreground="White" FontWeight="Bold" HorizontalContentAlignment="Center" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             <Label x:Name="labelGPUloadPercent" Content="%" Canvas.Left="160" Canvas.Top="94" Height="30" Width="40" Foreground="White" FontWeight="Bold" HorizontalContentAlignment="Center" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <Label x:Name="labelCPUwatts" Content="0 W" Canvas.Left="60" Canvas.Top="82" Height="20" Width="46" Foreground="White" Padding="0,0,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
-            <Label x:Name="labelGPUwatts" Content="0 W" Canvas.Left="208" Canvas.Top="82" Height="20" Width="46" Foreground="White" Padding="0,0,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
+            <Label x:Name="labelCPUwatts" Content="0,0 W" Canvas.Left="60" Canvas.Top="82" Height="20" Width="56" Foreground="White" Padding="0,0,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
+            <Label x:Name="labelGPUwatts" Content="0,0 W" Canvas.Left="208" Canvas.Top="82" Height="20" Width="56" Foreground="White" Padding="0,0,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
 
         </Canvas>
     </Border>
