@@ -13,6 +13,9 @@
         Title="settings" Height="400" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent" AllowsTransparency="True">
 
     <Border CornerRadius="7" Background="#FF404040">
+        <Border.Effect>
+            <DropShadowEffect Color="Black" Direction="320" ShadowDepth="5" Opacity="0.5" BlurRadius="10"/>
+        </Border.Effect>
 
         <Grid>
             <Label x:Name="closeButton" Content="&#xE711;" Canvas.Left="278" Foreground="White" Height="22" Width="22" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Segoe Fluent Icons" Margin="478,0,0,0">
