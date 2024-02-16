@@ -138,10 +138,10 @@ namespace SystemLoadTracker
                 }
                 catch (Exception ex)
                 {
-                    Dispatcher.Invoke(() => MessageBox.Show($"Error updating hardware data: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error));
+                    Dispatcher.BeginInvoke(() => MessageBox.Show($"Error updating hardware data: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error));
                 }
 
-                Dispatcher.Invoke(() =>
+                Dispatcher.BeginInvoke(() =>
                 {
                     UpdateUIElements();
                     UpdateClocks();
@@ -202,19 +202,11 @@ namespace SystemLoadTracker
         // Updates UI elements related to GPU
         private long GetTotalVRAM()
         {
-            using (var device = new Device(SharpDX.Direct3D.DriverType.Hardware))
-            {
-                using (var dxgiDevice = device.QueryInterface<SharpDX.DXGI.Device2>())
-                {
-                    using (var adapter = dxgiDevice.Adapter)
-                    {
-                        using (var dxgiAdapter = adapter.QueryInterface<SharpDX.DXGI.Adapter3>())
-                        {
-                            return dxgiAdapter.Description.DedicatedVideoMemory;
-                        }
-                    }
-                }
-            }
+            using var device = new Device(SharpDX.Direct3D.DriverType.Hardware);
+            using var dxgiDevice = device.QueryInterface<SharpDX.DXGI.Device2>();
+            using var adapter = dxgiDevice.Adapter;
+            using var dxgiAdapter = adapter.QueryInterface<SharpDX.DXGI.Adapter3>();
+            return dxgiAdapter.Description.DedicatedVideoMemory;
         }
 
         private void UpdateGpuUI(IHardware gpu)
@@ -259,8 +251,13 @@ namespace SystemLoadTracker
 
         private long GetTotalRAM()
         {
-            var cimObject = new ManagementObjectSearcher("SELECT * FROM Win32_ComputerSystem").Get().Cast<ManagementObject>().First();
-            return Convert.ToInt64(cimObject["TotalPhysicalMemory"]);
+            using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_ComputerSystem");
+            using var collection = searcher.Get();
+            foreach (var item in collection)
+            {
+                return Convert.ToInt64(item["TotalPhysicalMemory"]);
+            }
+            return 0;
         }
 
 
@@ -332,7 +329,7 @@ namespace SystemLoadTracker
                     if (cpuCount > 0)
                     {
                         float averageCpuClock = totalCpuClock / cpuCount;  // Calculate the average
-                        Dispatcher.Invoke(() =>
+                        Dispatcher.BeginInvoke(() =>
                         {
                             labelCpuClock.Content = $"{averageCpuClock:N0}";  // Update CPU clock speed label in the UI
                         });
@@ -344,7 +341,7 @@ namespace SystemLoadTracker
                     if (clockSensor != null)
                     {
                         float gpuClock = clockSensor.Value.GetValueOrDefault();
-                        Dispatcher.Invoke(() =>
+                        Dispatcher.BeginInvoke(() =>
                         {
                             labelGpuClock.Content = $"{gpuClock:N0}";  // Update GPU clock speed label in the UI
                         });
