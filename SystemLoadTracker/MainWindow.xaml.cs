@@ -400,6 +400,20 @@ namespace SystemLoadTracker
         }
 
 
+        // makes closeButton and settingsButton invisible when mouse is not over the window
+        private void Window_MouseLeave(object sender, MouseEventArgs e)
+        {
+            closeButton.Visibility = Visibility.Hidden;
+            settingsButton.Visibility = Visibility.Hidden;
+        }
+
+        private void Window_MouseEnter(object sender, MouseEventArgs e)
+        {
+            closeButton.Visibility = Visibility.Visible;
+            settingsButton.Visibility = Visibility.Visible;
+        }
+
+
 
 
         // Settings

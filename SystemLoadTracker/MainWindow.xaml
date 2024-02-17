@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        MouseEnter="Window_MouseEnter"
+        MouseLeave="Window_MouseLeave"
 
         RenderOptions.ClearTypeHint="Enabled"
         
@@ -118,7 +120,7 @@
                     </LinearGradientBrush>
                 </Border.BorderBrush>
             </Border>
-            <Border Canvas.Left="272" Height="22" Width="22" CornerRadius="{StaticResource CornerRadius}" Background="Transparent" x:Name="closeButtonBorder" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Border x:Name="closeButtonBorder" Canvas.Left="272" Height="22" Width="22" CornerRadius="0,6,0,0" Background="Transparent" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <Label x:Name="closeButton" Content="&#xE711;" Foreground="White" Height="22" Width="22" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Segoe Fluent Icons">
                     <Label.Style>
                         <Style TargetType="Label">
