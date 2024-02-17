@@ -8,11 +8,17 @@ namespace SystemLoadTracker
     {
 
         private MainWindow mainWindow;
+        private Color colorON;
+        private Color colorOFF;
         public Settings(double currentOpacity, MainWindow mainWindow)
         {
             InitializeComponent();
             opacitySlider.Value = currentOpacity;
             this.mainWindow = mainWindow;
+
+
+            colorON = (Color)ColorConverter.ConvertFromString("#FF5F5F5F");
+            colorOFF = (Color)ColorConverter.ConvertFromString("#FFB0B0B0");
 
 
             // Initialisieren Sie das Label basierend auf dem gespeicherten Zustand
@@ -32,9 +38,12 @@ namespace SystemLoadTracker
 
             // Initialisieren Sie die Labels basierend auf der gespeicherten Einstellung
             double currentInterval = Properties.Settings.Default.RefreshInterval;
-            RefreshTimeCheckbox05.Content = currentInterval == 0.5 ? "\uE73E" : "";
-            RefreshTimeCheckbox1.Content = currentInterval == 1.0 ? "\uE73E" : "";
-            RefreshTimeCheckbox2.Content = currentInterval == 2.0 ? "\uE73E" : "";
+            RefreshTimeCheckbox05.Background = currentInterval == 0.5 ? Brushes.White : Brushes.Transparent;
+            RefreshTimeCheckbox05.Foreground = currentInterval == 0.5 ? new SolidColorBrush(colorON) : new SolidColorBrush(colorOFF);
+            RefreshTimeCheckbox1.Background = currentInterval == 1.0 ? Brushes.White : Brushes.Transparent;
+            RefreshTimeCheckbox1.Foreground = currentInterval == 1.0 ? new SolidColorBrush(colorON) : new SolidColorBrush(colorOFF);
+            RefreshTimeCheckbox2.Background = currentInterval == 2.0 ? Brushes.White : Brushes.Transparent;
+            RefreshTimeCheckbox2.Foreground = currentInterval == 2.0 ? new SolidColorBrush(colorON) : new SolidColorBrush(colorOFF);
         }
 
         // Changes the background color of the close button when the mouse enters
@@ -132,10 +141,16 @@ namespace SystemLoadTracker
             mainWindow.UpdateTimerInterval(interval); // Methode im MainWindow, um das Timer-Intervall zu aktualisieren
 
             // Aktualisieren Sie die Inhalte der Labels, um die Auswahl widerzuspiegeln
-            RefreshTimeCheckbox05.Content = interval == 0.5 ? "\uE73E" : "";
-            RefreshTimeCheckbox1.Content = interval == 1.0 ? "\uE73E" : "";
-            RefreshTimeCheckbox2.Content = interval == 2.0 ? "\uE73E" : "";
+
+            RefreshTimeCheckbox05.Background = interval == 0.5 ? Brushes.White : Brushes.Transparent;
+            RefreshTimeCheckbox05.Foreground = interval == 0.5 ? new SolidColorBrush(colorON) : new SolidColorBrush(colorOFF);
+            RefreshTimeCheckbox1.Background = interval == 1.0 ? Brushes.White : Brushes.Transparent;
+            RefreshTimeCheckbox1.Foreground = interval == 1.0 ? new SolidColorBrush(colorON) : new SolidColorBrush(colorOFF);
+            RefreshTimeCheckbox2.Background = interval == 2.0 ? Brushes.White : Brushes.Transparent;
+            RefreshTimeCheckbox2.Foreground = interval == 2.0 ? new SolidColorBrush(colorON) : new SolidColorBrush(colorOFF);
+
         }
+
 
 
 
