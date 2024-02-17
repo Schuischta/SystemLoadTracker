@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Helle Farben -->
+    <SolidColorBrush x:Key="MainBackground" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="ProgressBarBackground" Color="#FFDDDDDD"/>
+    <SolidColorBrush x:Key="CpuProgressBarForeground" Color="#FF7B3300"/>
+    <SolidColorBrush x:Key="GpuProgressBarForeground" Color="#FF5C007A"/>
+    <SolidColorBrush x:Key="TextColor" Color="Black"/>
+
+    <!-- Beispiel für einen Button-Style im Hellen Theme -->
+    <Style x:Key="LightButtonStyle" TargetType="Label">
+        <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+        <!-- Weitere Setter für den Style -->
+    </Style>
+
+    <!-- Weitere Styles und Farben für das Helle Theme -->
+</ResourceDictionary>

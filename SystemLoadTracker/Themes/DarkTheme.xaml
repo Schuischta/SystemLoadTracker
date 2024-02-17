@@ -1,0 +1,19 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Dunkle Farben -->
+    <SolidColorBrush x:Key="MainBackground" Color="#FF404040"/>
+    <SolidColorBrush x:Key="ProgressBarBackground" Color="#FF545454"/>
+    <SolidColorBrush x:Key="CpuProgressBarForeground" Color="#FFBA5541"/>
+    <SolidColorBrush x:Key="GpuProgressBarForeground" Color="#FF8F64D7"/>
+    <SolidColorBrush x:Key="TextColor" Color="White"/>
+
+    <!-- Beispiel für einen Button-Style im Dunklen Theme -->
+    <Style x:Key="DarkButtonStyle" TargetType="Button">
+        <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+        <Setter Property="Background" Value="{StaticResource MainBackground}"/>
+        <!-- Weitere Setter für den Style -->
+    </Style>
+
+    <!-- Weitere Styles und Farben für das Dunkle Theme -->
+</ResourceDictionary>
