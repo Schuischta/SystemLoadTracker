@@ -121,7 +121,7 @@
                 </Border.BorderBrush>
             </Border>
             <Border x:Name="closeButtonBorder" Canvas.Left="272" Height="22" Width="22" CornerRadius="0,6,0,0" Background="Transparent" HorizontalAlignment="Left" VerticalAlignment="Center">
-                <Label x:Name="closeButton" Content="&#xE711;" Foreground="White" Height="22" Width="22" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Segoe Fluent Icons">
+                <Label x:Name="closeButton" Content="&#xE711;" Foreground="White" Height="22" Width="22" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Segoe Fluent Icons" Visibility="Hidden">
                     <Label.Style>
                         <Style TargetType="Label">
                             <EventSetter Event="MouseEnter" Handler="CloseButton_MouseEnter"/>
@@ -133,7 +133,7 @@
             </Border>
 
 
-            <Label x:Name="settingsButton" Content="&#xE713;" Canvas.Left="272" Foreground="White" Height="22" Width="22" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontFamily="Segoe Fluent Icons" Padding="5,5,5,5" VerticalContentAlignment="Center" Canvas.Top="22">
+            <Label x:Name="settingsButton" Content="&#xE713;" Canvas.Left="272" Foreground="White" Height="22" Width="22" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontFamily="Segoe Fluent Icons" Padding="5,5,5,5" VerticalContentAlignment="Center" Canvas.Top="22" Visibility="Hidden">
                 <Label.Style>
                     <Style TargetType="Label">
                         <EventSetter Event="MouseEnter" Handler="settingsButton_MouseEnter"/>
