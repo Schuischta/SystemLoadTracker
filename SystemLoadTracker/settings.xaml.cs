@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -6,69 +7,62 @@ namespace SystemLoadTracker
 {
     public partial class Settings : Window
     {
+        private const string ColorOnCode = "#FF5F5F5F";
+        private const string ColorOffCode = "#FFB0B0B0";
+        private const string IconCode = "\uE73E";
 
         private MainWindow mainWindow;
         private Color colorON;
         private Color colorOFF;
-        public Settings(double currentOpacity, MainWindow mainWindow)
+
+        public Settings(double currentOpacity, double currentCornerRadius, MainWindow mainWindow)
         {
             InitializeComponent();
             opacitySlider.Value = currentOpacity;
+            cornerRadiusSlider.Value = currentCornerRadius;
             this.mainWindow = mainWindow;
 
+            colorON = (Color)ColorConverter.ConvertFromString(ColorOnCode);
+            colorOFF = (Color)ColorConverter.ConvertFromString(ColorOffCode);
 
-            colorON = (Color)ColorConverter.ConvertFromString("#FF5F5F5F");
-            colorOFF = (Color)ColorConverter.ConvertFromString("#FFB0B0B0");
-
-
-            // Initialisieren Sie das Label basierend auf dem gespeicherten Zustand
-            if (Properties.Settings.Default.FixedWindow)
-            {
-                FixedWindowCheckbox.Content = ""; // oder was auch immer der Standardinhalt ist
-            }
-            else
-            {
-                FixedWindowCheckbox.Content = "\uE73E"; // Das Icon
-            }
-
-
-            // Initialize the label based on the saved setting
-            AlwaysOnTopCheckbox.Content = Properties.Settings.Default.AlwaysOnTop ? "\uE73E" : "";
-
-
-            // Initialisieren Sie die Labels basierend auf der gespeicherten Einstellung
-            double currentInterval = Properties.Settings.Default.RefreshInterval;
-            RefreshTimeCheckbox05.Background = currentInterval == 0.5 ? Brushes.White : Brushes.Transparent;
-            RefreshTimeCheckbox05.Foreground = currentInterval == 0.5 ? new SolidColorBrush(colorON) : new SolidColorBrush(colorOFF);
-            RefreshTimeCheckbox1.Background = currentInterval == 1.0 ? Brushes.White : Brushes.Transparent;
-            RefreshTimeCheckbox1.Foreground = currentInterval == 1.0 ? new SolidColorBrush(colorON) : new SolidColorBrush(colorOFF);
-            RefreshTimeCheckbox2.Background = currentInterval == 2.0 ? Brushes.White : Brushes.Transparent;
-            RefreshTimeCheckbox2.Foreground = currentInterval == 2.0 ? new SolidColorBrush(colorON) : new SolidColorBrush(colorOFF);
-
-
-            // Initialisieren Sie das Label basierend auf der gespeicherten Einstellung
-            showBorderCheckbox.Content = Properties.Settings.Default.ShowMainWindowBorder ? "\uE73E" : "";
+            this.Loaded += (s, e) => InitializeControls();
         }
 
-        // Changes the background color of the close button when the mouse enters
+
+        private void InitializeControls()
+        {
+            FixedWindowCheckbox.Content = Properties.Settings.Default.FixedWindow ? "" : IconCode;
+            AlwaysOnTopCheckbox.Content = Properties.Settings.Default.AlwaysOnTop ? IconCode : "";
+            showBorderCheckbox.Content = Properties.Settings.Default.ShowMainWindowBorder ? IconCode : "";
+            cornerRadiusSlider.Value = Properties.Settings.Default.CornerRadius;
+
+            double currentInterval = Properties.Settings.Default.RefreshInterval;
+            SetCheckboxColors(RefreshTimeCheckbox05, currentInterval, 0.5);
+            SetCheckboxColors(RefreshTimeCheckbox1, currentInterval, 1.0);
+            SetCheckboxColors(RefreshTimeCheckbox2, currentInterval, 2.0);
+        }
+
+        private void SetCheckboxColors(Control checkbox, double currentInterval, double targetInterval)
+        {
+            checkbox.Background = currentInterval == targetInterval ? Brushes.White : Brushes.Transparent;
+            checkbox.Foreground = currentInterval == targetInterval ? new SolidColorBrush(colorON) : new SolidColorBrush(colorOFF);
+        }
+
         private void CloseButton_MouseEnter(object sender, MouseEventArgs e)
         {
             closeButton.Background = Brushes.IndianRed;
         }
 
-        // Resets the background color of the close button when the mouse leaves
         private void CloseButton_MouseLeave(object sender, MouseEventArgs e)
         {
             closeButton.Background = Brushes.Transparent;
         }
 
-        // Closes the window when the close button is clicked
         private void CloseButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Close();
         }
 
-        // Allows the window to be moved by dragging
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
@@ -77,7 +71,6 @@ namespace SystemLoadTracker
             }
         }
 
-        // Changes the opacity of the main window when the slider value changes
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             var mainWindow = Application.Current.MainWindow as MainWindow;
@@ -89,38 +82,29 @@ namespace SystemLoadTracker
             }
         }
 
-
-
         private void FixedWindowCheckbox_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (mainWindow.canMoveWindow) // Wenn das Fenster bereits bewegt werden kann
+            if (mainWindow.canMoveWindow)
             {
-                mainWindow.DisableWindowMove(); // Fensterbewegung deaktivieren
-                FixedWindowCheckbox.Content = "\uE73E";
+                mainWindow.DisableWindowMove();
             }
             else
             {
-                mainWindow.EnableWindowMove(); // Fensterbewegung aktivieren
-                FixedWindowCheckbox.Content = "";
+                mainWindow.EnableWindowMove();
             }
 
             Properties.Settings.Default.FixedWindow = mainWindow.canMoveWindow;
             Properties.Settings.Default.Save();
 
+            FixedWindowCheckbox.Content = mainWindow.canMoveWindow ? "" : IconCode;
         }
 
-
-        // Toggles the Always on Top setting
         private void AlwaysOnTopCheckbox_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            mainWindow.ToggleAlwaysOnTop(); // Ändere den Zustand von Always on Top
+            mainWindow.ToggleAlwaysOnTop();
 
-            // Aktualisiere den Inhalt des Labels, um den aktuellen Zustand widerzuspiegeln
-            AlwaysOnTopCheckbox.Content = Properties.Settings.Default.AlwaysOnTop ? "\uE73E" : "";
+            AlwaysOnTopCheckbox.Content = Properties.Settings.Default.AlwaysOnTop ? IconCode : "";
         }
-
-
-
 
         private void RefreshTimeCheckbox05_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -142,30 +126,30 @@ namespace SystemLoadTracker
             Properties.Settings.Default.RefreshInterval = interval;
             Properties.Settings.Default.Save();
 
-            mainWindow.UpdateTimerInterval(interval); // Methode im MainWindow, um das Timer-Intervall zu aktualisieren
+            mainWindow.UpdateTimerInterval(interval);
 
-            // Aktualisieren Sie die Inhalte der Labels, um die Auswahl widerzuspiegeln
-
-            RefreshTimeCheckbox05.Background = interval == 0.5 ? Brushes.White : Brushes.Transparent;
-            RefreshTimeCheckbox05.Foreground = interval == 0.5 ? new SolidColorBrush(colorON) : new SolidColorBrush(colorOFF);
-            RefreshTimeCheckbox1.Background = interval == 1.0 ? Brushes.White : Brushes.Transparent;
-            RefreshTimeCheckbox1.Foreground = interval == 1.0 ? new SolidColorBrush(colorON) : new SolidColorBrush(colorOFF);
-            RefreshTimeCheckbox2.Background = interval == 2.0 ? Brushes.White : Brushes.Transparent;
-            RefreshTimeCheckbox2.Foreground = interval == 2.0 ? new SolidColorBrush(colorON) : new SolidColorBrush(colorOFF);
-
+            SetCheckboxColors(RefreshTimeCheckbox05, interval, 0.5);
+            SetCheckboxColors(RefreshTimeCheckbox1, interval, 1.0);
+            SetCheckboxColors(RefreshTimeCheckbox2, interval, 2.0);
         }
-
 
         private void showBorderCheckbox_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var showBorder = !Properties.Settings.Default.ShowMainWindowBorder;
-            mainWindow.ToggleMainWindowBorder(showBorder); // Wechselt den Zustand des Borders im MainWindow
+            mainWindow.ToggleMainWindowBorder(showBorder);
 
-            // Aktualisieren Sie den Inhalt des Labels, um den aktuellen Zustand widerzuspiegeln
-            showBorderCheckbox.Content = showBorder ? "\uE73E" : "";
+            showBorderCheckbox.Content = showBorder ? IconCode : "";
         }
 
-
-
+        private void cornerRadiusSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            var newCornerRadius = e.NewValue;
+            if (mainWindow != null)
+            {
+                mainWindow.SetCornerRadius(newCornerRadius);
+            }
+            Properties.Settings.Default.CornerRadius = newCornerRadius;
+            Properties.Settings.Default.Save();
+        }
     }
 }

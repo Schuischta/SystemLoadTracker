@@ -15,7 +15,7 @@ namespace SystemLoadTracker
         private const float VramConversionFactor = 1024f;
 
         private readonly Computer computer;
-        private DispatcherTimer timer;
+        private DispatcherTimer? timer;
 
         private int lastGpuLoadValue = -1;
         private int lastCpuLoadValue = -1;
@@ -28,8 +28,17 @@ namespace SystemLoadTracker
         public MainWindow()
         {
             InitializeComponent();
+            computer = new Computer();
+            totalVram = GetTotalVRAM();
+            totalRam = GetTotalRAM();
+            InitializeSettings();
             InitializeTimer();
+            InitializeComputer();
+        }
 
+
+        private void InitializeSettings()
+        {
             // Set the window position
             this.Closing += MainWindow_Closing;
 
@@ -39,29 +48,23 @@ namespace SystemLoadTracker
                 this.Left = Properties.Settings.Default.WindowLeft;
             }
 
-
             // Set the FixedWindow property based on the saved settings
             canMoveWindow = Properties.Settings.Default.FixedWindow;
-
 
             // Set Topmost based on the saved setting
             this.Topmost = Properties.Settings.Default.AlwaysOnTop;
 
-
             // Set ShowBorder based on the saved setting
             ToggleMainWindowBorder(Properties.Settings.Default.ShowMainWindowBorder);
 
+            SetCornerRadius(Properties.Settings.Default.CornerRadius);
+        }
 
-            computer = new Computer
-            {
-                IsCpuEnabled = true,  // Enable CPU monitoring
-                IsGpuEnabled = true,  // Enable GPU monitoring
-                IsMemoryEnabled = true  // Enable RAM monitoring
-            };
-
-
-            totalVram = GetTotalVRAM();
-            totalRam = GetTotalRAM();
+        private void InitializeComputer()
+        {
+            computer.IsCpuEnabled = true;  // Enable CPU monitoring
+            computer.IsGpuEnabled = true;  // Enable GPU monitoring
+            computer.IsMemoryEnabled = true;  // Enable RAM monitoring
 
             LoadWindowSettings();
 
@@ -74,6 +77,8 @@ namespace SystemLoadTracker
                 MessageBox.Show($"Error initializing hardware monitoring: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+
 
 
         private void InitializeTimer()
@@ -90,40 +95,6 @@ namespace SystemLoadTracker
             {
                 timer.Interval = TimeSpan.FromSeconds(interval);
             }
-        }
-
-
-
-
-        // Load saved settings
-        private void LoadWindowSettings()
-        {
-            this.Top = Properties.Settings.Default.WindowTop;
-            this.Left = Properties.Settings.Default.WindowLeft;
-            SetOpacity(Properties.Settings.Default.MainWindowOpacity);
-        }
-
-        // Sets the transparency
-        public void SetOpacity(double opacity)
-        {
-            this.Opacity = opacity;
-        }
-
-        // Saves window position
-        private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
-        {
-            Properties.Settings.Default.WindowTop = this.Top;
-            Properties.Settings.Default.WindowLeft = this.Left;
-            Properties.Settings.Default.Save();
-        }
-
-        // Sets the "Always on top" property
-        public void ToggleAlwaysOnTop()
-        {
-            bool isCurrentlyOnTop = Properties.Settings.Default.AlwaysOnTop;
-            this.Topmost = !isCurrentlyOnTop;
-            Properties.Settings.Default.AlwaysOnTop = !isCurrentlyOnTop;
-            Properties.Settings.Default.Save();
         }
 
 
@@ -389,8 +360,9 @@ namespace SystemLoadTracker
         // Open the settings window
         private void settingsButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Settings secondWindow = new Settings(this.Opacity, this);
-            secondWindow.ShowDialog();
+            Settings settingsWindow = new Settings(this.Opacity, Properties.Settings.Default.CornerRadius, this);
+
+            settingsWindow.ShowDialog();
         }
 
         private void settingsButton_MouseEnter(object sender, MouseEventArgs e)
@@ -422,9 +394,38 @@ namespace SystemLoadTracker
 
         // Settings
 
+        // Load saved settings
+        private void LoadWindowSettings()
+        {
+            this.Top = Properties.Settings.Default.WindowTop;
+            this.Left = Properties.Settings.Default.WindowLeft;
+            SetOpacity(Properties.Settings.Default.MainWindowOpacity);
+        }
+
+        // Sets the transparency
+        public void SetOpacity(double opacity)
+        {
+            this.Opacity = opacity;
+        }
+
+        // Saves window position
+        private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Properties.Settings.Default.WindowTop = this.Top;
+            Properties.Settings.Default.WindowLeft = this.Left;
+            Properties.Settings.Default.Save();
+        }
+
+        // Sets the "Always on top" property
+        public void ToggleAlwaysOnTop()
+        {
+            bool isCurrentlyOnTop = Properties.Settings.Default.AlwaysOnTop;
+            this.Topmost = !isCurrentlyOnTop;
+            Properties.Settings.Default.AlwaysOnTop = !isCurrentlyOnTop;
+            Properties.Settings.Default.Save();
+        }
 
         // Enables or disables window dragging
-
         public bool canMoveWindow = true;
 
         public void EnableWindowMove()
@@ -437,8 +438,6 @@ namespace SystemLoadTracker
             canMoveWindow = false;
         }
 
-
-
         // Toggles the visibility of the main window border
         public void ToggleMainWindowBorder(bool showBorder)
         {
@@ -446,6 +445,16 @@ namespace SystemLoadTracker
             Properties.Settings.Default.ShowMainWindowBorder = showBorder;
             Properties.Settings.Default.Save();
         }
+
+        public void SetCornerRadius(double cornerRadius)
+        {
+            // Setzen Sie den Corner Radius für die gewünschten Elemente
+            mainWindowCorner.CornerRadius = new CornerRadius(cornerRadius);
+            // Wiederholen Sie dies für andere Elemente, die Sie ändern möchten
+        }
+
+
+
 
 
     }

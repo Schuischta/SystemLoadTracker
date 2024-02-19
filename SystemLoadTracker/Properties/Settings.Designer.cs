@@ -106,5 +106,17 @@ namespace SystemLoadTracker.Properties {
                 this["ShowMainWindowBorder"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("6")]
+        public double CornerRadius {
+            get {
+                return ((double)(this["CornerRadius"]));
+            }
+            set {
+                this["CornerRadius"] = value;
+            }
+        }
     }
 }

@@ -12,12 +12,8 @@
         
         Title="SystemLoadTracker" Height="189" Width="272" ResizeMode="NoResize" Background="Transparent" UseLayoutRounding="True" WindowStyle="None" AllowsTransparency="True" Icon="/SLT_icon.png" MinWidth="294" MinHeight="196">
 
-        <Window.Resources>
-        <CornerRadius x:Key="CornerRadius">6</CornerRadius>
-        </Window.Resources>
 
-
-    <Border CornerRadius="{StaticResource CornerRadius}" Background="#FF404040">
+    <Border x:Name="mainWindowCorner" CornerRadius="6" Background="#FF404040">
 
         <Canvas>
             <ProgressBar x:Name="progressbarCPU" Height="40" Canvas.Left="-58" Canvas.Top="78" Width="176" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Background="#FF545454" BorderBrush="#FF545454" Value="80" Foreground="#FFBA5541">
@@ -96,7 +92,7 @@
             <Label x:Name="labelRAM" Content="0,0 GB" Canvas.Left="73" Canvas.Top="166" Height="20" Width="54" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" FontSize="14"/>
             <Label x:Name="labelGPUtemp" Content="0°C" Canvas.Left="224" Canvas.Top="124" Height="20" Width="40" Foreground="White" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,0,0,0" FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <Label x:Name="labelVRAM" Content="0,0 GB" Canvas.Left="217" Canvas.Top="166" Height="20" Width="54" Foreground="White" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,0,0,0" FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-            <Border x:Name="mainWindowBorder" BorderThickness="2,2,2,2" Height="196" Width="294" CornerRadius="{StaticResource CornerRadius}" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+            <Border x:Name="mainWindowBorder" BorderThickness="2,2,2,2" Height="196" Width="294" CornerRadius="6" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
                 <Border.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
