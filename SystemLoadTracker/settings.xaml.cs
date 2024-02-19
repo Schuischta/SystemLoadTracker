@@ -44,6 +44,10 @@ namespace SystemLoadTracker
             RefreshTimeCheckbox1.Foreground = currentInterval == 1.0 ? new SolidColorBrush(colorON) : new SolidColorBrush(colorOFF);
             RefreshTimeCheckbox2.Background = currentInterval == 2.0 ? Brushes.White : Brushes.Transparent;
             RefreshTimeCheckbox2.Foreground = currentInterval == 2.0 ? new SolidColorBrush(colorON) : new SolidColorBrush(colorOFF);
+
+
+            // Initialisieren Sie das Label basierend auf der gespeicherten Einstellung
+            showBorderCheckbox.Content = Properties.Settings.Default.ShowMainWindowBorder ? "\uE73E" : "";
         }
 
         // Changes the background color of the close button when the mouse enters
@@ -152,6 +156,14 @@ namespace SystemLoadTracker
         }
 
 
+        private void showBorderCheckbox_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var showBorder = !Properties.Settings.Default.ShowMainWindowBorder;
+            mainWindow.ToggleMainWindowBorder(showBorder); // Wechselt den Zustand des Borders im MainWindow
+
+            // Aktualisieren Sie den Inhalt des Labels, um den aktuellen Zustand widerzuspiegeln
+            showBorderCheckbox.Content = showBorder ? "\uE73E" : "";
+        }
 
 
 

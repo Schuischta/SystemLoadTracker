@@ -96,7 +96,7 @@
             <Label x:Name="labelRAM" Content="0,0 GB" Canvas.Left="73" Canvas.Top="166" Height="20" Width="54" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" FontSize="14"/>
             <Label x:Name="labelGPUtemp" Content="0°C" Canvas.Left="224" Canvas.Top="124" Height="20" Width="40" Foreground="White" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,0,0,0" FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <Label x:Name="labelVRAM" Content="0,0 GB" Canvas.Left="217" Canvas.Top="166" Height="20" Width="54" Foreground="White" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,0,0,0" FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-            <Border BorderThickness="2,2,2,2" Height="196" Width="294" CornerRadius="{StaticResource CornerRadius}" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+            <Border x:Name="mainWindowBorder" BorderThickness="2,2,2,2" Height="196" Width="294" CornerRadius="{StaticResource CornerRadius}" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
                 <Border.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>

@@ -45,7 +45,11 @@ namespace SystemLoadTracker
 
 
             // Set Topmost based on the saved setting
-            this.Topmost = Properties.Settings.Default.AlwaysOnTop; 
+            this.Topmost = Properties.Settings.Default.AlwaysOnTop;
+
+
+            // Set ShowBorder based on the saved setting
+            ToggleMainWindowBorder(Properties.Settings.Default.ShowMainWindowBorder);
 
 
             computer = new Computer
@@ -432,6 +436,17 @@ namespace SystemLoadTracker
         {
             canMoveWindow = false;
         }
+
+
+
+        // Toggles the visibility of the main window border
+        public void ToggleMainWindowBorder(bool showBorder)
+        {
+            mainWindowBorder.Visibility = showBorder ? Visibility.Visible : Visibility.Collapsed;
+            Properties.Settings.Default.ShowMainWindowBorder = showBorder;
+            Properties.Settings.Default.Save();
+        }
+
 
     }
 }
