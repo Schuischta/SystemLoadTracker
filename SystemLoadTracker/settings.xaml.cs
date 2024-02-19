@@ -25,7 +25,10 @@ namespace SystemLoadTracker
             colorON = (Color)ColorConverter.ConvertFromString(ColorOnCode);
             colorOFF = (Color)ColorConverter.ConvertFromString(ColorOffCode);
 
-            this.Loaded += (s, e) => InitializeControls();
+            settingsWindowCorner.CornerRadius = new CornerRadius(Properties.Settings.Default.SettingsWindowCornerRadius);
+            closeButtonBorder.CornerRadius = new CornerRadius(0, Properties.Settings.Default.SettingsWindowCornerRadius, 0, 0);
+
+            Loaded += (s, e) => InitializeControls();
         }
 
 
@@ -34,7 +37,7 @@ namespace SystemLoadTracker
             FixedWindowCheckbox.Content = Properties.Settings.Default.FixedWindow ? "" : IconCode;
             AlwaysOnTopCheckbox.Content = Properties.Settings.Default.AlwaysOnTop ? IconCode : "";
             showBorderCheckbox.Content = Properties.Settings.Default.ShowMainWindowBorder ? IconCode : "";
-            cornerRadiusSlider.Value = Properties.Settings.Default.CornerRadius;
+            cornerRadiusSlider.Value = Properties.Settings.Default.MainWindowCornerRadius;
 
             double currentInterval = Properties.Settings.Default.RefreshInterval;
             SetCheckboxColors(RefreshTimeCheckbox05, currentInterval, 0.5);
@@ -50,12 +53,12 @@ namespace SystemLoadTracker
 
         private void CloseButton_MouseEnter(object sender, MouseEventArgs e)
         {
-            closeButton.Background = Brushes.IndianRed;
+            closeButtonBorder.Background = Brushes.IndianRed;
         }
 
         private void CloseButton_MouseLeave(object sender, MouseEventArgs e)
         {
-            closeButton.Background = Brushes.Transparent;
+            closeButtonBorder.Background = Brushes.Transparent;
         }
 
         private void CloseButton_MouseDown(object sender, MouseButtonEventArgs e)
@@ -147,8 +150,11 @@ namespace SystemLoadTracker
             if (mainWindow != null)
             {
                 mainWindow.SetCornerRadius(newCornerRadius);
+                settingsWindowCorner.CornerRadius = new CornerRadius(newCornerRadius);
+                closeButtonBorder.CornerRadius = new CornerRadius(0, newCornerRadius, 0, 0);
             }
-            Properties.Settings.Default.CornerRadius = newCornerRadius;
+            Properties.Settings.Default.SettingsWindowCornerRadius = newCornerRadius;
+            Properties.Settings.Default.MainWindowCornerRadius = newCornerRadius;
             Properties.Settings.Default.Save();
         }
     }

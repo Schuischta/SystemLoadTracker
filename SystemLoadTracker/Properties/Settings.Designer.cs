@@ -110,12 +110,24 @@ namespace SystemLoadTracker.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("6")]
-        public double CornerRadius {
+        public double MainWindowCornerRadius {
             get {
-                return ((double)(this["CornerRadius"]));
+                return ((double)(this["MainWindowCornerRadius"]));
             }
             set {
-                this["CornerRadius"] = value;
+                this["MainWindowCornerRadius"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("6")]
+        public double SettingsWindowCornerRadius {
+            get {
+                return ((double)(this["SettingsWindowCornerRadius"]));
+            }
+            set {
+                this["SettingsWindowCornerRadius"] = value;
             }
         }
     }

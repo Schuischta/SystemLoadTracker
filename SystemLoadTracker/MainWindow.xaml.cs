@@ -57,7 +57,7 @@ namespace SystemLoadTracker
             // Set ShowBorder based on the saved setting
             ToggleMainWindowBorder(Properties.Settings.Default.ShowMainWindowBorder);
 
-            SetCornerRadius(Properties.Settings.Default.CornerRadius);
+            SetCornerRadius(Properties.Settings.Default.MainWindowCornerRadius);
         }
 
         private void InitializeComputer()
@@ -325,12 +325,16 @@ namespace SystemLoadTracker
             }
         }
 
+
+
         // Ensures proper resource release on window close
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
             computer.Close();
         }
+
+
 
         // UI event handlers for interaction
         private void CloseButton_MouseEnter(object sender, MouseEventArgs e)
@@ -357,10 +361,12 @@ namespace SystemLoadTracker
             }
         }
 
+
+
         // Open the settings window
         private void settingsButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Settings settingsWindow = new Settings(this.Opacity, Properties.Settings.Default.CornerRadius, this);
+            Settings settingsWindow = new Settings(this.Opacity, Properties.Settings.Default.MainWindowCornerRadius, this);
 
             settingsWindow.ShowDialog();
         }
@@ -374,6 +380,7 @@ namespace SystemLoadTracker
         {
             settingsButton.Background = Brushes.Transparent;
         }
+
 
 
         // makes closeButton and settingsButton invisible when mouse is not over the window
@@ -450,7 +457,9 @@ namespace SystemLoadTracker
         {
             // Setzen Sie den Corner Radius für die gewünschten Elemente
             mainWindowCorner.CornerRadius = new CornerRadius(cornerRadius);
-            // Wiederholen Sie dies für andere Elemente, die Sie ändern möchten
+            mainWindowBorder.CornerRadius = new CornerRadius(cornerRadius);
+
+            closeButtonBorder.CornerRadius = new CornerRadius(0, cornerRadius, 0, 0);
         }
 
 

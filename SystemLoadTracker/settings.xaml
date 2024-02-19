@@ -15,6 +15,7 @@
     <Border x:Name="settingsWindowCorner" CornerRadius="6" Background="#FF404040">
 
         <Grid>
+            <Border x:Name="closeButtonBorder" CornerRadius="0,6,0,0" BorderThickness="0" Margin="362,0,0,0" Width="22" Height="22" VerticalAlignment="Top"/>
             <Label x:Name="closeButton" Content="&#xE711;" Canvas.Left="278" Foreground="White" Height="22" Width="22" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Segoe Fluent Icons" Margin="362,0,0,0">
                 <Label.Style>
                     <Style TargetType="Label">
@@ -24,6 +25,7 @@
                     </Style>
                 </Label.Style>
             </Label>
+
             <Rectangle HorizontalAlignment="Center" Height="30" Margin="0,60,0,0" VerticalAlignment="Top" Width="384" Fill="#FF525252"/>
             <Rectangle HorizontalAlignment="Center" Height="30" Margin="0,120,0,0" VerticalAlignment="Top" Width="384" Fill="#FF525252"/>
             <Rectangle HorizontalAlignment="Center" Height="30" Margin="0,180,0,0" VerticalAlignment="Top" Width="384" Fill="#FF525252"/>
@@ -67,6 +69,8 @@
 
             <Label x:Name="ShowBorderLabel" Content="Show border" HorizontalAlignment="Left" Margin="10,185,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0,0,0,0" Foreground="White" FontSize="14" FontWeight="Bold" Height="20"/>
             <Label x:Name="showBorderCheckbox" Content="" HorizontalAlignment="Left" Margin="354,185,0,0" VerticalAlignment="Top" FontSize="14" Foreground="White" FontFamily="Segoe Fluent Icons" Background="#FF737373" BorderBrush="#FF737373" BorderThickness="2" Width="20" Height="20" Padding="0,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MouseDown="showBorderCheckbox_MouseDown"/>
+            <Rectangle x:Name="RefreshTimeSeperator1_Copy" HorizontalAlignment="Left" Height="22" Margin="234,65,0,0" VerticalAlignment="Top" Width="2" Fill="#FF5F5F5F"/>
+            <Rectangle x:Name="RefreshTimeSeperator1_Copy1" HorizontalAlignment="Left" Height="22" Margin="304,65,0,0" VerticalAlignment="Top" Width="2" Fill="#FF5F5F5F"/>
 
 
 

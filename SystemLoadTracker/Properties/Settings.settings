@@ -23,7 +23,10 @@
     <Setting Name="ShowMainWindowBorder" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="CornerRadius" Type="System.Double" Scope="User">
+    <Setting Name="MainWindowCornerRadius" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">6</Value>
+    </Setting>
+    <Setting Name="SettingsWindowCornerRadius" Type="System.Double" Scope="User">
       <Value Profile="(Default)">6</Value>
     </Setting>
   </Settings>
