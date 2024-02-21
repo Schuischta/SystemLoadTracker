@@ -1,7 +1,10 @@
-﻿using System.Windows;
+﻿using System.IO;
+using System.Reflection;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using Microsoft.Win32.TaskScheduler;
 
 namespace SystemLoadTracker
 {
@@ -38,6 +41,7 @@ namespace SystemLoadTracker
             AlwaysOnTopCheckbox.Content = Properties.Settings.Default.AlwaysOnTop ? IconCode : "";
             showBorderCheckbox.Content = Properties.Settings.Default.ShowMainWindowBorder ? IconCode : "";
             cornerRadiusSlider.Value = Properties.Settings.Default.MainWindowCornerRadius;
+            PCStartupCheckbox.Content = Properties.Settings.Default.StartWithWindows ? IconCode : "";
 
             double currentInterval = Properties.Settings.Default.RefreshInterval;
             SetCheckboxColors(RefreshTimeCheckbox05, currentInterval, 0.5);
@@ -156,6 +160,50 @@ namespace SystemLoadTracker
             Properties.Settings.Default.SettingsWindowCornerRadius = newCornerRadius;
             Properties.Settings.Default.MainWindowCornerRadius = newCornerRadius;
             Properties.Settings.Default.Save();
+        }
+
+
+        private void StartupCheckbox_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (Properties.Settings.Default.StartWithWindows)
+            {
+                DeleteStartupTask();
+                PCStartupCheckbox.Content = "";
+                Properties.Settings.Default.StartWithWindows = false;
+            }
+            else
+            {
+                CreateStartupTask();
+                PCStartupCheckbox.Content = IconCode;
+                Properties.Settings.Default.StartWithWindows = true;
+            }
+
+            Properties.Settings.Default.Save();
+        }
+
+
+        public void CreateStartupTask()
+        {
+            using (TaskService ts = new TaskService())
+            {
+                TaskDefinition td = ts.NewTask();
+                td.RegistrationInfo.Description = "SystemLoadTracker";
+                td.Principal.RunLevel = TaskRunLevel.Highest; // Run with highest privileges
+
+                td.Triggers.Add(new LogonTrigger { Enabled = true }); // Trigger on logon
+
+                td.Actions.Add(new ExecAction(Assembly.GetExecutingAssembly().Location, null, Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))); // Action to start the application
+
+                ts.RootFolder.RegisterTaskDefinition("SystemLoadTracker", td); // Register the task
+            }
+        }
+
+        public void DeleteStartupTask()
+        {
+            using (TaskService ts = new TaskService())
+            {
+                ts.RootFolder.DeleteTask("SystemLoadTracker");
+            }
         }
     }
 }
