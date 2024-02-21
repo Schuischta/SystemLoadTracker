@@ -25,6 +25,9 @@ namespace SystemLoadTracker
         private readonly long totalVram;
         private readonly long totalRam;
 
+        private System.Windows.Forms.NotifyIcon? notifyIcon = null;
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -58,7 +61,38 @@ namespace SystemLoadTracker
             ToggleMainWindowBorder(Properties.Settings.Default.ShowMainWindowBorder);
 
             SetCornerRadius(Properties.Settings.Default.MainWindowCornerRadius);
+
+            InitializeNotifyIcon();
         }
+
+        private void InitializeNotifyIcon()
+        {
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon();
+            this.notifyIcon.Icon = new System.Drawing.Icon("SLT_icon.ico");
+            this.notifyIcon.Visible = Properties.Settings.Default.ShowInSystemTray;
+            this.ShowInTaskbar = !Properties.Settings.Default.ShowInSystemTray;
+
+            // Create a new ContextMenuStrip
+            var contextMenu = new System.Windows.Forms.ContextMenuStrip();
+
+            // Create a new ToolStripMenuItem for closing the application
+            var closeMenuItem = new System.Windows.Forms.ToolStripMenuItem("Close");
+            closeMenuItem.Click += (sender, e) => Application.Current.Shutdown();
+            contextMenu.Items.Add(closeMenuItem);
+
+            // Create a new ToolStripMenuItem for bringing the application to the foreground
+            var foregroundMenuItem = new System.Windows.Forms.ToolStripMenuItem("Bring to Foreground");
+            foregroundMenuItem.Click += (sender, e) =>
+            {
+                this.WindowState = WindowState.Normal;
+                this.Activate();
+            };
+            contextMenu.Items.Add(foregroundMenuItem);
+
+            // Assign the ContextMenuStrip to the NotifyIcon
+            this.notifyIcon.ContextMenuStrip = contextMenu;
+        }
+
 
         private void InitializeComputer()
         {
@@ -463,7 +497,11 @@ namespace SystemLoadTracker
         }
 
 
-
+        // System Tray
+        public void SetNotifyIconVisibility(bool visible)
+        {
+            notifyIcon.Visible = visible;
+        }
 
 
     }

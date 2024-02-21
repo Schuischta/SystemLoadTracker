@@ -142,5 +142,17 @@ namespace SystemLoadTracker.Properties {
                 this["StartWithWindows"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShowInSystemTray {
+            get {
+                return ((bool)(this["ShowInSystemTray"]));
+            }
+            set {
+                this["ShowInSystemTray"] = value;
+            }
+        }
     }
 }

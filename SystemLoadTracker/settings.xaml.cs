@@ -42,6 +42,7 @@ namespace SystemLoadTracker
             showBorderCheckbox.Content = Properties.Settings.Default.ShowMainWindowBorder ? IconCode : "";
             cornerRadiusSlider.Value = Properties.Settings.Default.MainWindowCornerRadius;
             PCStartupCheckbox.Content = Properties.Settings.Default.StartWithWindows ? IconCode : "";
+            SystemTrayCheckbox.Content = Properties.Settings.Default.ShowInSystemTray ? IconCode : "";
 
             double currentInterval = Properties.Settings.Default.RefreshInterval;
             SetCheckboxColors(RefreshTimeCheckbox05, currentInterval, 0.5);
@@ -199,7 +200,6 @@ namespace SystemLoadTracker
             }
         }
 
-
         public void DeleteStartupTask()
         {
             using (TaskService ts = new TaskService())
@@ -207,5 +207,19 @@ namespace SystemLoadTracker
                 ts.RootFolder.DeleteTask("SystemLoadTracker");
             }
         }
+
+
+        private void SystemTrayCheckbox_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            bool showInSystemTray = !Properties.Settings.Default.ShowInSystemTray;
+            Properties.Settings.Default.ShowInSystemTray = showInSystemTray;
+            Properties.Settings.Default.Save();
+
+            mainWindow.SetNotifyIconVisibility(showInSystemTray);
+            mainWindow.ShowInTaskbar = !showInSystemTray;
+
+            SystemTrayCheckbox.Content = showInSystemTray ? IconCode : "";
+        }
+
     }
 }
