@@ -192,11 +192,13 @@ namespace SystemLoadTracker
 
                 td.Triggers.Add(new LogonTrigger { Enabled = true }); // Trigger on logon
 
-                td.Actions.Add(new ExecAction(Assembly.GetExecutingAssembly().Location, null, Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))); // Action to start the application
+                string appDirectory = System.AppContext.BaseDirectory;
+                td.Actions.Add(new ExecAction(Path.Combine(appDirectory, "SystemLoadTracker.exe"), null, appDirectory)); // Action to start the application
 
                 ts.RootFolder.RegisterTaskDefinition("SystemLoadTracker", td); // Register the task
             }
         }
+
 
         public void DeleteStartupTask()
         {
