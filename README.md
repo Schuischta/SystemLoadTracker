@@ -33,4 +33,4 @@ The System Load Tracker is a lightweight WPF application that monitors key syste
 We welcome contributions! If you have suggestions or find issues, please open an issue or submit a pull request.
 
 ## License
-This project is under the MIT License - see the [LICENSE](https://github.com/Schuischta/SystemLoadTracker/blob/master/LICENSE.txt) file for details.
+This project is under the MIT License - see the [LICENSE](https://github.com/Schuischta/SystemLoadTracker/blob/master/LICENSE) file for details.
