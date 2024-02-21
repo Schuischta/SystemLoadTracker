@@ -8,6 +8,7 @@ The System Load Tracker is a lightweight WPF application that monitors key syste
 - **GPU Monitoring:** Shows GPU usage, how much VRAM is being used, GPU temperature, and its clock speed.
 - **RAM Monitoring:** Shows how much RAM is being used.
 - **Real-Time Updates:** Refreshes the data every second to give the latest info.
+- **Settings:** Change corner radius, show border, change opacity, fixed window, always on top and change refresh time (more is coming soon)
 - **Customizable Interface:** Coming soon
 
 ## Screenshot
