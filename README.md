@@ -19,6 +19,7 @@ The System Load Tracker is a lightweight WPF application that monitors key syste
 ## Requirements
 - .NET 8
 - Windows 10/11 (could also work on older versions of Windows)
+- [Segoe Fluent Icons Font](https://learn.microsoft.com/en-us/windows/apps/design/downloads/#fonts) (pre-installed on Windows 11)
 
 ## Installation
 
