@@ -21,6 +21,7 @@ namespace SystemLoadTracker
         public Settings(double currentOpacity, double currentCornerRadius, MainWindow mainWindow)
         {
             InitializeComponent();
+            ChangeSettingsTheme();
             opacitySlider.Value = currentOpacity;
             cornerRadiusSlider.Value = currentCornerRadius;
             this.mainWindow = mainWindow;
@@ -220,6 +221,47 @@ namespace SystemLoadTracker
 
             SystemTrayCheckbox.Content = showInSystemTray ? IconCode : "";
         }
+
+
+
+        // Change the theme
+        public void ChangeSettingsTheme()
+        {
+            var theme = Properties.Settings.Default.Theme;
+            var dict = new ResourceDictionary();
+
+            if (theme == "Dark")
+            {
+                dict.Source = new Uri("Themes/DarkTheme.xaml", UriKind.Relative);
+            }
+            else
+            {
+                dict.Source = new Uri("Themes/LightTheme.xaml", UriKind.Relative);
+            }
+
+            this.Resources.MergedDictionaries.Add(dict);
+        }
+
+
+
+        private void LightThemeLabel_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Properties.Settings.Default.Theme = "Light";
+            Properties.Settings.Default.Save();
+            
+            ChangeSettingsTheme();
+            mainWindow.ChangeTheme();
+        }
+
+        private void DarkThemeLabel_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Properties.Settings.Default.Theme = "Dark";
+            Properties.Settings.Default.Save();
+
+            ChangeSettingsTheme();
+            mainWindow.ChangeTheme();
+        }
+
 
     }
 }

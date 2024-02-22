@@ -37,7 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="SLT_icon.ico" />
+    <EmbeddedResource Include="SLT_icon.ico" />
   </ItemGroup>
 
   <ItemGroup>

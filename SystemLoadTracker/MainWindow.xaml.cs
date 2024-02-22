@@ -6,6 +6,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 using System.Management;
+using System.IO;
+using System.Reflection;
 
 namespace SystemLoadTracker
 {
@@ -42,6 +44,7 @@ namespace SystemLoadTracker
 
         private void InitializeSettings()
         {
+            ChangeTheme();
             // Set the window position
             this.Closing += MainWindow_Closing;
 
@@ -68,7 +71,16 @@ namespace SystemLoadTracker
         private void InitializeNotifyIcon()
         {
             this.notifyIcon = new System.Windows.Forms.NotifyIcon();
-            this.notifyIcon.Icon = new System.Drawing.Icon("C:\\Users\\schuischta\\source\\repos\\SystemLoadTracker\\SystemLoadTracker\\SLT_icon.ico");
+            Stream? iconStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("SystemLoadTracker.SLT_icon.ico");
+            if (iconStream != null)
+            {
+                this.notifyIcon.Icon = new System.Drawing.Icon(iconStream);
+            }
+            else
+            {
+                // Throw an exception when the iconStream is null
+                throw new InvalidOperationException("Icon stream could not be loaded.");
+            }
             this.notifyIcon.Visible = Properties.Settings.Default.ShowInSystemTray;
             this.ShowInTaskbar = !Properties.Settings.Default.ShowInSystemTray;
 
@@ -500,8 +512,37 @@ namespace SystemLoadTracker
         // System Tray
         public void SetNotifyIconVisibility(bool visible)
         {
-            notifyIcon.Visible = visible;
+            if (notifyIcon != null)
+            {
+                notifyIcon.Visible = visible;
+            }
+            else
+            {
+                // Throw an exception when notifyIcon is null
+                throw new InvalidOperationException("Notify icon has not been initialized.");
+            }
         }
+
+
+        // Change the theme
+        public void ChangeTheme()
+        {
+            var theme = Properties.Settings.Default.Theme;
+            var dict = new ResourceDictionary();
+
+            if (theme == "Dark")
+            {
+                dict.Source = new Uri("Themes/DarkTheme.xaml", UriKind.Relative);
+            }
+            else
+            {
+                dict.Source = new Uri("Themes/LightTheme.xaml", UriKind.Relative);
+            }
+
+            this.Resources.MergedDictionaries.Add(dict);
+        }
+
+
 
 
     }

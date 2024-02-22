@@ -13,10 +13,10 @@
         Title="SystemLoadTracker" Height="189" Width="272" ResizeMode="NoResize" Background="Transparent" UseLayoutRounding="True" WindowStyle="None" AllowsTransparency="True" Icon="/SLT_icon.png" MinWidth="294" MinHeight="196">
 
 
-    <Border x:Name="mainWindowCorner" CornerRadius="6" Background="#FF404040">
+    <Border x:Name="mainWindowCorner" CornerRadius="6" Background="{DynamicResource BackgroundColor}">
 
         <Canvas>
-            <ProgressBar x:Name="progressbarCPU" Height="40" Canvas.Left="-58" Canvas.Top="78" Width="176" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Background="#FF545454" BorderBrush="#FF545454" Value="80" Foreground="#FFBA5541">
+            <ProgressBar x:Name="progressbarCPU" Height="40" Canvas.Left="-58" Canvas.Top="78" Width="176" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Background="{DynamicResource BackgroundColorProgressbar}" BorderBrush="{DynamicResource BackgroundColorProgressbar}" Value="80" Foreground="#FFBA5541">
                 <ProgressBar.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -26,7 +26,7 @@
                     </TransformGroup>
                 </ProgressBar.RenderTransform>
             </ProgressBar>
-            <ProgressBar x:Name="progressbarGPU" Height="40" Canvas.Left="86" Canvas.Top="78" Width="176" RenderTransformOrigin="0.5,0.5" Foreground="#FF8F64D7" Background="#FF545454" BorderBrush="#FF545454" HorizontalAlignment="Left" VerticalAlignment="Center" Value="80">
+            <ProgressBar x:Name="progressbarGPU" Height="40" Canvas.Left="86" Canvas.Top="78" Width="176" RenderTransformOrigin="0.5,0.5" Foreground="#FF8F64D7" Background="{DynamicResource BackgroundColorProgressbar}" BorderBrush="{DynamicResource BackgroundColorProgressbar}" HorizontalAlignment="Left" VerticalAlignment="Center" Value="80">
                 <ProgressBar.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -36,7 +36,7 @@
                     </TransformGroup>
                 </ProgressBar.RenderTransform>
             </ProgressBar>
-            <ProgressBar x:Name="progressbarRAM" Height="20" Canvas.Top="166" Width="80" RenderTransformOrigin="0.5,0.5" Foreground="#FFBA5541" Background="#FF545454" BorderBrush="#FF545454" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="60" Value="80">
+            <ProgressBar x:Name="progressbarRAM" Height="20" Canvas.Top="166" Width="80" RenderTransformOrigin="0.5,0.5" Foreground="#FFBA5541" Background="{DynamicResource BackgroundColorProgressbar}" BorderBrush="{DynamicResource BackgroundColorProgressbar}" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="60" Value="80">
                 <ProgressBar.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -46,7 +46,7 @@
                     </TransformGroup>
                 </ProgressBar.RenderTransform>
             </ProgressBar>
-            <ProgressBar x:Name="progressbarCPUtemp" Height="20" Canvas.Top="124" Width="80" RenderTransformOrigin="0.5,0.5" Foreground="#FFBA5541" Background="#FF545454" BorderBrush="#FF545454" Canvas.Left="60" HorizontalAlignment="Center" VerticalAlignment="Top" Value="80">
+            <ProgressBar x:Name="progressbarCPUtemp" Height="20" Canvas.Top="124" Width="80" RenderTransformOrigin="0.5,0.5" Foreground="#FFBA5541" Background="{DynamicResource BackgroundColorProgressbar}" BorderBrush="{DynamicResource BackgroundColorProgressbar}" Canvas.Left="60" HorizontalAlignment="Center" VerticalAlignment="Top" Value="80">
                 <ProgressBar.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -56,7 +56,7 @@
                     </TransformGroup>
                 </ProgressBar.RenderTransform>
             </ProgressBar>
-            <ProgressBar x:Name="progressbarVRAM" Height="20" Canvas.Top="166" Width="80" RenderTransformOrigin="0.5,0.5" Foreground="#FF8F64D7" Background="#FF545454" BorderBrush="#FF545454" Canvas.Left="204" HorizontalAlignment="Left" VerticalAlignment="Center" Value="80">
+            <ProgressBar x:Name="progressbarVRAM" Height="20" Canvas.Top="166" Width="80" RenderTransformOrigin="0.5,0.5" Foreground="#FF8F64D7" Background="{DynamicResource BackgroundColorProgressbar}" BorderBrush="{DynamicResource BackgroundColorProgressbar}" Canvas.Left="204" HorizontalAlignment="Left" VerticalAlignment="Center" Value="80">
                 <ProgressBar.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -66,7 +66,7 @@
                     </TransformGroup>
                 </ProgressBar.RenderTransform>
             </ProgressBar>
-            <ProgressBar x:Name="progressbarGPUtemp" Height="20" Canvas.Top="124" Width="80" RenderTransformOrigin="0.5,0.5" Foreground="#FF8F64D7" Background="#FF545454" BorderBrush="#FF545454" Canvas.Left="204" HorizontalAlignment="Left" VerticalAlignment="Center" Value="80">
+            <ProgressBar x:Name="progressbarGPUtemp" Height="20" Canvas.Top="124" Width="80" RenderTransformOrigin="0.5,0.5" Foreground="#FF8F64D7" Background="{DynamicResource BackgroundColorProgressbar}" BorderBrush="{DynamicResource BackgroundColorProgressbar}" Canvas.Left="204" HorizontalAlignment="Left" VerticalAlignment="Center" Value="80">
                 <ProgressBar.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -76,22 +76,22 @@
                     </TransformGroup>
                 </ProgressBar.RenderTransform>
             </ProgressBar>
-            <Label x:Name="labelCPU" Content="CPU" Canvas.Left="59" Canvas.Top="2" Height="32" Width="52" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontWeight="Bold" FontSize="24" Padding="0,0,0,0"/>
-            <Label x:Name="labelGPU" Content="GPU" Canvas.Left="205" Canvas.Top="2" Height="32" Width="52" Foreground="White" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0,0,0,0" Grid.IsSharedSizeScope="True"/>
-            <Label x:Name="labelCpuClock" Content="0" Canvas.Left="59" Canvas.Top="31" Height="30" Width="75" Foreground="White" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Segoe UI" FontWeight="Bold" Padding="0,0,0,0" Grid.IsSharedSizeScope="True"/>
-            <Label x:Name="labelCPUMHz" Content="MHz" Canvas.Left="59" Canvas.Top="52" Height="22" Width="38" Foreground="White" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0,0,0,0" Grid.IsSharedSizeScope="True"/>
-            <Label x:Name="labelGpuClock" Content="0" Canvas.Left="205" Canvas.Top="31" Height="28" Width="75" Foreground="White" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0,0,0,0" Grid.IsSharedSizeScope="True"/>
-            <Label x:Name="labelGPUMHz" Content="MHz" Canvas.Left="205" Canvas.Top="52" Height="22" Width="38" Foreground="White" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0,0,0,0"/>
-            <Label x:Name="labelCPUtemperature" Content="Temp." Canvas.Left="60" Canvas.Top="106" Height="20" Width="40" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0,0,0,0" FontWeight="Bold" FontSize="14"/>
-            <Label x:Name="labelCPUram" Content="RAM" Canvas.Left="60" Canvas.Top="150" Height="16" Width="32" Foreground="White" FontFamily="Arial" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0,0,0,0" FontSize="14"/>
-            <Label x:Name="labelGPUtemperature" Content="Temp." Canvas.Left="204" Canvas.Top="106" Height="20" Width="43" Foreground="White" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,0,0,0" Grid.IsSharedSizeScope="True" FontSize="14"/>
-            <Label x:Name="labelGPUvram" Content="VRAM" Canvas.Left="204" Canvas.Top="148" Height="20" Width="42" Foreground="White" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,0,0,0" FontSize="14"/>
-            <Label x:Name="labelCPUload" Content="100" Canvas.Left="8" Canvas.Top="73" Height="34" Width="44" Foreground="White" FontWeight="Bold" HorizontalContentAlignment="Center" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <Label x:Name="labelCPUtemp" Content="0°C" Canvas.Left="80" Canvas.Top="124" Height="20" Width="40" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0,0,0,0" FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-            <Label x:Name="labelGPUload" Content="100" Canvas.Left="152" Canvas.Top="73" Height="34" Width="44" Foreground="White" FontWeight="Bold" HorizontalContentAlignment="Center" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <Label x:Name="labelRAM" Content="0,0 GB" Canvas.Left="73" Canvas.Top="166" Height="20" Width="54" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" FontSize="14"/>
-            <Label x:Name="labelGPUtemp" Content="0°C" Canvas.Left="224" Canvas.Top="124" Height="20" Width="40" Foreground="White" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,0,0,0" FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-            <Label x:Name="labelVRAM" Content="0,0 GB" Canvas.Left="217" Canvas.Top="166" Height="20" Width="54" Foreground="White" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,0,0,0" FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="labelCPU" Content="CPU" Canvas.Left="59" Canvas.Top="2" Height="32" Width="52" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="{DynamicResource TextColor}" FontWeight="Bold" FontSize="24" Padding="0,0,0,0"/>
+            <Label x:Name="labelGPU" Content="GPU" Canvas.Left="205" Canvas.Top="2" Height="32" Width="52" Foreground="{DynamicResource TextColor}" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0,0,0,0" Grid.IsSharedSizeScope="True"/>
+            <Label x:Name="labelCpuClock" Content="0" Canvas.Left="59" Canvas.Top="31" Height="30" Width="75" Foreground="{DynamicResource TextColor}" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Segoe UI" FontWeight="Bold" Padding="0,0,0,0" Grid.IsSharedSizeScope="True"/>
+            <Label x:Name="labelCPUMHz" Content="MHz" Canvas.Left="59" Canvas.Top="52" Height="22" Width="38" Foreground="{DynamicResource TextColor}" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0,0,0,0" Grid.IsSharedSizeScope="True"/>
+            <Label x:Name="labelGpuClock" Content="0" Canvas.Left="205" Canvas.Top="31" Height="28" Width="75" Foreground="{DynamicResource TextColor}" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0,0,0,0" Grid.IsSharedSizeScope="True"/>
+            <Label x:Name="labelGPUMHz" Content="MHz" Canvas.Left="205" Canvas.Top="52" Height="22" Width="38" Foreground="{DynamicResource TextColor}" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0,0,0,0"/>
+            <Label x:Name="labelCPUtemperature" Content="Temp." Canvas.Left="60" Canvas.Top="106" Height="20" Width="40" Foreground="{DynamicResource TextColor}" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0,0,0,0" FontWeight="Bold" FontSize="14"/>
+            <Label x:Name="labelCPUram" Content="RAM" Canvas.Left="60" Canvas.Top="150" Height="16" Width="32" Foreground="{DynamicResource TextColor}" FontFamily="Arial" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0,0,0,0" FontSize="14"/>
+            <Label x:Name="labelGPUtemperature" Content="Temp." Canvas.Left="204" Canvas.Top="106" Height="20" Width="43" Foreground="{DynamicResource TextColor}" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,0,0,0" Grid.IsSharedSizeScope="True" FontSize="14"/>
+            <Label x:Name="labelGPUvram" Content="VRAM" Canvas.Left="204" Canvas.Top="148" Height="20" Width="42" Foreground="{DynamicResource TextColor}" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,0,0,0" FontSize="14"/>
+            <Label x:Name="labelCPUload" Content="100" Canvas.Left="8" Canvas.Top="73" Height="34" Width="44" Foreground="{DynamicResource TextColor}" FontWeight="Bold" HorizontalContentAlignment="Center" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Label x:Name="labelCPUtemp" Content="0°C" Canvas.Left="80" Canvas.Top="124" Height="20" Width="40" Foreground="{DynamicResource TextColor}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0,0,0,0" FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="labelGPUload" Content="100" Canvas.Left="152" Canvas.Top="73" Height="34" Width="44" Foreground="{DynamicResource TextColor}" FontWeight="Bold" HorizontalContentAlignment="Center" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Label x:Name="labelRAM" Content="0,0 GB" Canvas.Left="73" Canvas.Top="166" Height="20" Width="54" Foreground="{DynamicResource TextColor}" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" FontSize="14"/>
+            <Label x:Name="labelGPUtemp" Content="0°C" Canvas.Left="224" Canvas.Top="124" Height="20" Width="40" Foreground="{DynamicResource TextColor}" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,0,0,0" FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="labelVRAM" Content="0,0 GB" Canvas.Left="217" Canvas.Top="166" Height="20" Width="54" Foreground="{DynamicResource TextColor}" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,0,0,0" FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <Border x:Name="mainWindowBorder" BorderThickness="2,2,2,2" Height="196" Width="294" CornerRadius="6" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
                 <Border.RenderTransform>
                     <TransformGroup>
@@ -117,7 +117,7 @@
                 </Border.BorderBrush>
             </Border>
             <Border x:Name="closeButtonBorder" Canvas.Left="272" Height="22" Width="22" CornerRadius="0,6,0,0" Background="Transparent" HorizontalAlignment="Left" VerticalAlignment="Center">
-                <Label x:Name="closeButton" Content="&#xE711;" Foreground="White" Height="22" Width="22" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Segoe Fluent Icons" Visibility="Hidden">
+                <Label x:Name="closeButton" Content="&#xE711;" Foreground="{DynamicResource TextColor}" Height="22" Width="22" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Segoe Fluent Icons" Visibility="Hidden">
                     <Label.Style>
                         <Style TargetType="Label">
                             <EventSetter Event="MouseEnter" Handler="CloseButton_MouseEnter"/>
@@ -129,7 +129,7 @@
             </Border>
 
 
-            <Label x:Name="settingsButton" Content="&#xE713;" Canvas.Left="272" Foreground="White" Height="22" Width="22" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontFamily="Segoe Fluent Icons" Padding="5,5,5,5" VerticalContentAlignment="Center" Canvas.Top="22" Visibility="Hidden">
+            <Label x:Name="settingsButton" Content="&#xE713;" Canvas.Left="272" Foreground="{DynamicResource TextColor}" Height="22" Width="22" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontFamily="Segoe Fluent Icons" Padding="5,5,5,5" VerticalContentAlignment="Center" Canvas.Top="22" Visibility="Hidden">
                 <Label.Style>
                     <Style TargetType="Label">
                         <EventSetter Event="MouseEnter" Handler="settingsButton_MouseEnter"/>
@@ -138,10 +138,10 @@
                     </Style>
                 </Label.Style>
             </Label>
-            <Label x:Name="labelCPUloadPercent" Content="%" Canvas.Left="10" Canvas.Top="89" Height="34" Width="40" Foreground="White" FontWeight="Bold" HorizontalContentAlignment="Center" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <Label x:Name="labelGPUloadPercent" Content="%" Canvas.Left="154" Canvas.Top="89" Height="34" Width="40" Foreground="White" FontWeight="Bold" HorizontalContentAlignment="Center" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <Label x:Name="labelCPUwatts" Content="0,0 W" Canvas.Left="59" Canvas.Top="73" Height="20" Width="56" Foreground="White" Padding="0,0,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
-            <Label x:Name="labelGPUwatts" Content="0,0 W" Canvas.Left="205" Canvas.Top="73" Height="20" Width="56" Foreground="White" Padding="0,0,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
+            <Label x:Name="labelCPUloadPercent" Content="%" Canvas.Left="10" Canvas.Top="89" Height="34" Width="40" Foreground="{DynamicResource TextColor}" FontWeight="Bold" HorizontalContentAlignment="Center" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Label x:Name="labelGPUloadPercent" Content="%" Canvas.Left="154" Canvas.Top="89" Height="34" Width="40" Foreground="{DynamicResource TextColor}" FontWeight="Bold" HorizontalContentAlignment="Center" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Label x:Name="labelCPUwatts" Content="0,0 W" Canvas.Left="59" Canvas.Top="73" Height="20" Width="56" Foreground="{DynamicResource TextColor}" Padding="0,0,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
+            <Label x:Name="labelGPUwatts" Content="0,0 W" Canvas.Left="205" Canvas.Top="73" Height="20" Width="56" Foreground="{DynamicResource TextColor}" Padding="0,0,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
             <Rectangle x:Name="Separator" Height="176" Canvas.Left="147" Width="1" HorizontalAlignment="Center" VerticalAlignment="Top" Fill="#FF545454" Canvas.Top="10"/>
 
         </Canvas>
