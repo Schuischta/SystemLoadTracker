@@ -68,7 +68,7 @@ namespace SystemLoadTracker
         private void InitializeNotifyIcon()
         {
             this.notifyIcon = new System.Windows.Forms.NotifyIcon();
-            this.notifyIcon.Icon = new System.Drawing.Icon("SLT_icon.ico");
+            this.notifyIcon.Icon = new System.Drawing.Icon("C:\\Users\\schuischta\\source\\repos\\SystemLoadTracker\\SystemLoadTracker\\SLT_icon.ico");
             this.notifyIcon.Visible = Properties.Settings.Default.ShowInSystemTray;
             this.ShowInTaskbar = !Properties.Settings.Default.ShowInSystemTray;
 
@@ -81,7 +81,7 @@ namespace SystemLoadTracker
             contextMenu.Items.Add(closeMenuItem);
 
             // Create a new ToolStripMenuItem for bringing the application to the foreground
-            var foregroundMenuItem = new System.Windows.Forms.ToolStripMenuItem("Bring to Foreground");
+            var foregroundMenuItem = new System.Windows.Forms.ToolStripMenuItem("Bring to Front");
             foregroundMenuItem.Click += (sender, e) =>
             {
                 this.WindowState = WindowState.Normal;
