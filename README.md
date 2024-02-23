@@ -29,6 +29,15 @@ The System Load Tracker is a lightweight WPF application that monitors key syste
 2. Unzip the file.
 3. Run the `SystemLoadTracker.exe` file to open the application.
 
+### Using winget
+1. Open `CMD` or `PowerShell`.
+2. Execute this command:
+```
+winget install Schuischta.SystemLoadTracker
+```
+4. Go to `C:\Users\YOUR_USER\AppData\Local\Microsoft\WinGet\Packages\Schuischta.SystemLoadTracker_Microsoft.Winget...`
+5. Run the `SystemLoadTracker.exe` file to open the application.
+
 ## Contributing
 We welcome contributions! If you have suggestions or find issues, please open an issue or submit a pull request.
 
