@@ -1,4 +1,4 @@
-# System Load Tracker
+# SystemLoadTracker
 
 ## Description
 The System Load Tracker is a lightweight WPF application that monitors key system performance indicators in real-time. It includes CPU, GPU, VRAM, and RAM usage, as well as temperature readings. Designed for ease of use, it lets users monitor their computer's performance easily.
