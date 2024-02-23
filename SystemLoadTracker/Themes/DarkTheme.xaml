@@ -4,7 +4,15 @@
     <SolidColorBrush x:Key="TextColor" Color="White"/>
     <SolidColorBrush x:Key="BackgroundColor" Color="#FF404040"/>
     <SolidColorBrush x:Key="BackgroundColorProgressbar" Color="#FF545454"/>
+    
     <SolidColorBrush x:Key="BackgroundColorSettings" Color="#FF525252"/>
     <SolidColorBrush x:Key="CheckboxBackgroundColor" Color="#FF737373"/>
+
+    <SolidColorBrush x:Key="ButtonBorderColor" Color="White"/>
+    <SolidColorBrush x:Key="ButtonBackgroundColorON" Color="White"/>
+    <SolidColorBrush x:Key="ButtonBackgroundColorOFF" Color="Transparent"/>
+    <SolidColorBrush x:Key="ButtonTextColorON" Color="#FF5F5F5F"/>
+    <SolidColorBrush x:Key="ButtonTextColorOFF" Color="#FFB0B0B0"/>
+
 
 </ResourceDictionary>

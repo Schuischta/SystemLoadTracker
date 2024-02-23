@@ -1,10 +1,9 @@
-﻿using System.IO;
-using System.Reflection;
+﻿using Microsoft.Win32.TaskScheduler;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using Microsoft.Win32.TaskScheduler;
 
 namespace SystemLoadTracker
 {
@@ -46,16 +45,44 @@ namespace SystemLoadTracker
             SystemTrayCheckbox.Content = Properties.Settings.Default.ShowInSystemTray ? IconCode : "";
 
             double currentInterval = Properties.Settings.Default.RefreshInterval;
-            SetCheckboxColors(RefreshTimeCheckbox05, currentInterval, 0.5);
-            SetCheckboxColors(RefreshTimeCheckbox1, currentInterval, 1.0);
-            SetCheckboxColors(RefreshTimeCheckbox2, currentInterval, 2.0);
+            SetRefreshTimeButtonColors(RefreshTimeCheckbox05, currentInterval, 0.5);
+            SetRefreshTimeButtonColors(RefreshTimeCheckbox1, currentInterval, 1.0);
+            SetRefreshTimeButtonColors(RefreshTimeCheckbox2, currentInterval, 2.0);
+
+            SetThemeButtonColors(LightThemeLabel, Properties.Settings.Default.Theme, "Light");
+            SetThemeButtonColors(DarkThemeLabel, Properties.Settings.Default.Theme, "Dark");
         }
 
-        private void SetCheckboxColors(Control checkbox, double currentInterval, double targetInterval)
+        private void SetRefreshTimeButtonColors(Control checkbox, double currentInterval, double targetInterval)
         {
-            checkbox.Background = currentInterval == targetInterval ? Brushes.White : Brushes.Transparent;
-            checkbox.Foreground = currentInterval == targetInterval ? new SolidColorBrush(colorON) : new SolidColorBrush(colorOFF);
+            if (currentInterval == targetInterval)
+            {
+                checkbox.Background = (Brush)FindResource("ButtonBackgroundColorON");
+                checkbox.Foreground = (Brush)FindResource("ButtonTextColorON");
+            }
+            else
+            {
+                checkbox.Background = (Brush)FindResource("ButtonBackgroundColorOFF");
+                checkbox.Foreground = (Brush)FindResource("ButtonTextColorOFF");
+            }
         }
+
+
+        private void SetThemeButtonColors(Label label, string currentTheme, string targetTheme)
+        {
+            if (currentTheme == targetTheme)
+            {
+                label.Background = (Brush)FindResource("ButtonBackgroundColorON");
+                label.Foreground = (Brush)FindResource("ButtonTextColorON");
+            }
+            else
+            {
+                label.Background = (Brush)FindResource("ButtonBackgroundColorOFF");
+                label.Foreground = (Brush)FindResource("ButtonTextColorOFF");
+            }
+        }
+
+
 
         private void CloseButton_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -137,9 +164,9 @@ namespace SystemLoadTracker
 
             mainWindow.UpdateTimerInterval(interval);
 
-            SetCheckboxColors(RefreshTimeCheckbox05, interval, 0.5);
-            SetCheckboxColors(RefreshTimeCheckbox1, interval, 1.0);
-            SetCheckboxColors(RefreshTimeCheckbox2, interval, 2.0);
+            SetRefreshTimeButtonColors(RefreshTimeCheckbox05, interval, 0.5);
+            SetRefreshTimeButtonColors(RefreshTimeCheckbox1, interval, 1.0);
+            SetRefreshTimeButtonColors(RefreshTimeCheckbox2, interval, 2.0);
         }
 
         private void showBorderCheckbox_MouseDown(object sender, MouseButtonEventArgs e)
@@ -248,9 +275,16 @@ namespace SystemLoadTracker
         {
             Properties.Settings.Default.Theme = "Light";
             Properties.Settings.Default.Save();
-            
+
             ChangeSettingsTheme();
             mainWindow.ChangeTheme();
+
+            SetRefreshTimeButtonColors(RefreshTimeCheckbox05, Properties.Settings.Default.RefreshInterval, 0.5);
+            SetRefreshTimeButtonColors(RefreshTimeCheckbox1, Properties.Settings.Default.RefreshInterval, 1.0);
+            SetRefreshTimeButtonColors(RefreshTimeCheckbox2, Properties.Settings.Default.RefreshInterval, 2.0);
+
+            SetThemeButtonColors(LightThemeLabel, Properties.Settings.Default.Theme, "Light");
+            SetThemeButtonColors(DarkThemeLabel, Properties.Settings.Default.Theme, "Dark");            
         }
 
         private void DarkThemeLabel_MouseDown(object sender, MouseButtonEventArgs e)
@@ -260,6 +294,13 @@ namespace SystemLoadTracker
 
             ChangeSettingsTheme();
             mainWindow.ChangeTheme();
+
+            SetRefreshTimeButtonColors(RefreshTimeCheckbox05, Properties.Settings.Default.RefreshInterval, 0.5);
+            SetRefreshTimeButtonColors(RefreshTimeCheckbox1, Properties.Settings.Default.RefreshInterval, 1.0);
+            SetRefreshTimeButtonColors(RefreshTimeCheckbox2, Properties.Settings.Default.RefreshInterval, 2.0);
+
+            SetThemeButtonColors(LightThemeLabel, Properties.Settings.Default.Theme, "Light");
+            SetThemeButtonColors(DarkThemeLabel, Properties.Settings.Default.Theme, "Dark");
         }
 
 
