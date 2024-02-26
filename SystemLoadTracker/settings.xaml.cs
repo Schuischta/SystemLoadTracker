@@ -304,5 +304,79 @@ namespace SystemLoadTracker
         }
 
 
+
+        private void CpuColor_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            // Erstellen Sie ein neues ColorDialog-Objekt
+            System.Windows.Forms.ColorDialog colorDialog = new System.Windows.Forms.ColorDialog();
+
+            // Zeigen Sie den Dialog an und prüfen Sie, ob der Benutzer auf OK geklickt hat
+            if (colorDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                // Konvertieren Sie die ausgewählte Farbe in eine WPF-Farbe
+                System.Drawing.Color winFormsColor = colorDialog.Color;
+                Color wpfColor = Color.FromArgb(winFormsColor.A, winFormsColor.R, winFormsColor.G, winFormsColor.B);
+
+                // Aktualisieren Sie die Farbe der ProgressBar
+                mainWindow.progressbarCPU.Foreground = new SolidColorBrush(wpfColor);
+                mainWindow.progressbarCPUtemp.Foreground = new SolidColorBrush(wpfColor);
+                mainWindow.progressbarRAM.Foreground = new SolidColorBrush(wpfColor);
+
+                // Ändern Sie die erste Farbe des GradientBrushes
+                var gradientBrush = mainWindow.mainWindowBorder.BorderBrush as GradientBrush;
+                if (gradientBrush != null && gradientBrush.GradientStops.Count > 1)
+                {
+                    gradientBrush.GradientStops[1].Color = wpfColor;
+                }
+
+                // Konvertieren Sie wpfColor in ein System.Drawing.Color-Objekt
+                System.Drawing.Color colorToSave = System.Drawing.Color.FromArgb(wpfColor.A, wpfColor.R, wpfColor.G, wpfColor.B);
+
+                // Speichern Sie die ausgewählte Farbe in den Eigenschaften der Anwendung
+                Properties.Settings.Default.CpuColor = colorToSave;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+
+
+
+
+        private void GpuColor_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            // Erstellen Sie ein neues ColorDialog-Objekt
+            System.Windows.Forms.ColorDialog colorDialog = new System.Windows.Forms.ColorDialog();
+
+            // Zeigen Sie den Dialog an und prüfen Sie, ob der Benutzer auf OK geklickt hat
+            if (colorDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                // Konvertieren Sie die ausgewählte Farbe in eine WPF-Farbe
+                System.Drawing.Color winFormsColor = colorDialog.Color;
+                Color wpfColor = Color.FromArgb(winFormsColor.A, winFormsColor.R, winFormsColor.G, winFormsColor.B);
+
+                // Aktualisieren Sie die Farbe der ProgressBar
+                mainWindow.progressbarGPU.Foreground = new SolidColorBrush(wpfColor);
+                mainWindow.progressbarGPUtemp.Foreground = new SolidColorBrush(wpfColor);
+                mainWindow.progressbarVRAM.Foreground = new SolidColorBrush(wpfColor);
+
+                // Ändern Sie die erste Farbe des GradientBrushes
+                var gradientBrush = mainWindow.mainWindowBorder.BorderBrush as GradientBrush;
+                if (gradientBrush != null && gradientBrush.GradientStops.Count > 0)
+                {
+                    gradientBrush.GradientStops[0].Color = wpfColor;
+                }
+
+                // Konvertieren Sie wpfColor in ein System.Drawing.Color-Objekt
+                System.Drawing.Color colorToSave = System.Drawing.Color.FromArgb(wpfColor.A, wpfColor.R, wpfColor.G, wpfColor.B);
+
+                // Speichern Sie die ausgewählte Farbe in den Eigenschaften der Anwendung
+                Properties.Settings.Default.GpuColor = colorToSave;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+
+
+
     }
 }

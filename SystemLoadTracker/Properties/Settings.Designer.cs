@@ -166,5 +166,28 @@ namespace SystemLoadTracker.Properties {
                 this["Theme"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0, 0, 0")]
+        public global::System.Drawing.Color CpuColor {
+            get {
+                return ((global::System.Drawing.Color)(this["CpuColor"]));
+            }
+            set {
+                this["CpuColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Drawing.Color GpuColor {
+            get {
+                return ((global::System.Drawing.Color)(this["GpuColor"]));
+            }
+            set {
+                this["GpuColor"] = value;
+            }
+        }
     }
 }

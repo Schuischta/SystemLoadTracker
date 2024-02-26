@@ -72,8 +72,8 @@
             <Rectangle x:Name="ThemeButtonSeperator1" HorizontalAlignment="Left" Height="20" Margin="234,65,0,0" VerticalAlignment="Top" Width="2" Fill="{DynamicResource TextColor}"/>
             <Rectangle x:Name="ThemeButtonSeperator2" HorizontalAlignment="Left" Height="20" Margin="304,65,0,0" VerticalAlignment="Top" Width="2" Fill="{DynamicResource TextColor}"/>
 
-            <Label x:Name="CpuColorButton" Content="&#xe790;" HorizontalAlignment="Left" Margin="354,95,0,0" VerticalAlignment="Top" FontSize="14" Foreground="{DynamicResource TextColor}" FontFamily="Segoe Fluent Icons" Background="{x:Null}" BorderThickness="2" Width="20" Height="20" Padding="0,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Cursor="Hand"/>
-            <Label x:Name="GpuColorButton" Content="&#xe790;" HorizontalAlignment="Left" Margin="354,125,0,0" VerticalAlignment="Top" FontSize="14" Foreground="{DynamicResource TextColor}" FontFamily="Segoe Fluent Icons" Background="{x:Null}" BorderThickness="2" Width="20" Height="20" Padding="0,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Cursor="Hand"/>
+            <Label x:Name="CpuColorButton" Content="&#xe790;" HorizontalAlignment="Left" Margin="354,95,0,0" VerticalAlignment="Top" FontSize="14" Foreground="{DynamicResource TextColor}" FontFamily="Segoe Fluent Icons" Background="{x:Null}" BorderThickness="2" Width="20" Height="20" Padding="0,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Cursor="Hand" MouseDown="CpuColor_MouseDown"/>
+            <Label x:Name="GpuColorButton" Content="&#xe790;" HorizontalAlignment="Left" Margin="354,125,0,0" VerticalAlignment="Top" FontSize="14" Foreground="{DynamicResource TextColor}" FontFamily="Segoe Fluent Icons" Background="{x:Null}" BorderThickness="2" Width="20" Height="20" Padding="0,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Cursor="Hand" MouseDown="GpuColor_MouseDown"/>
 
 
 
