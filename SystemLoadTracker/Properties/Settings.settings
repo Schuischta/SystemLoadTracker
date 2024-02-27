@@ -39,10 +39,10 @@
       <Value Profile="(Default)">Dark</Value>
     </Setting>
     <Setting Name="CpuColor" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">0, 0, 0, 0</Value>
+      <Value Profile="(Default)">92, 180, 190</Value>
     </Setting>
     <Setting Name="GpuColor" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">61, 181, 107</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -72,7 +72,11 @@ namespace SystemLoadTracker
 
         private void SetNotifyIcon()
         {
-            this.notifyIcon = new System.Windows.Forms.NotifyIcon();
+            if (this.notifyIcon == null)
+            {
+                this.notifyIcon = new System.Windows.Forms.NotifyIcon();
+            }
+
             Stream? iconStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("SystemLoadTracker.SLT_icon.ico");
             if (iconStream != null)
             {
@@ -108,18 +112,16 @@ namespace SystemLoadTracker
         }
 
 
+
         private void SetCustomColors()
         {
             // CPU
 
-            // Überprüfen Sie, ob eine Farbe in den Einstellungen gespeichert ist
-            if (Properties.Settings.Default.CpuColor != null)
+            if (Properties.Settings.Default.CpuColor != System.Drawing.Color.Empty)
             {
-                // Konvertieren Sie die gespeicherte Farbe in eine WPF-Farbe
                 System.Drawing.Color winFormsColor = Properties.Settings.Default.CpuColor;
                 Color wpfColor = Color.FromArgb(winFormsColor.A, winFormsColor.R, winFormsColor.G, winFormsColor.B);
 
-                // Wenden Sie die Farbe auf die ProgressBar an
                 progressbarCPU.Foreground = new SolidColorBrush(wpfColor);
                 progressbarCPUtemp.Foreground = new SolidColorBrush(wpfColor);
                 progressbarRAM.Foreground = new SolidColorBrush(wpfColor);
@@ -133,14 +135,11 @@ namespace SystemLoadTracker
 
             // GPU
 
-            // Überprüfen Sie, ob eine Farbe in den Einstellungen gespeichert ist
-            if (Properties.Settings.Default.GpuColor != null)
+            if (Properties.Settings.Default.GpuColor != System.Drawing.Color.Empty)
             {
-                // Konvertieren Sie die gespeicherte Farbe in eine WPF-Farbe
                 System.Drawing.Color winFormsColor = Properties.Settings.Default.GpuColor;
                 Color wpfColor = Color.FromArgb(winFormsColor.A, winFormsColor.R, winFormsColor.G, winFormsColor.B);
 
-                // Wenden Sie die Farbe auf die ProgressBar an
                 progressbarGPU.Foreground = new SolidColorBrush(wpfColor);
                 progressbarGPUtemp.Foreground = new SolidColorBrush(wpfColor);
                 progressbarVRAM.Foreground = new SolidColorBrush(wpfColor);
@@ -426,6 +425,10 @@ namespace SystemLoadTracker
         {
             base.OnClosed(e);
             computer.Close();
+            if (notifyIcon != null)
+            {
+                notifyIcon.Dispose();
+            }
         }
 
 

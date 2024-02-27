@@ -169,7 +169,7 @@ namespace SystemLoadTracker.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0, 0, 0, 0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("92, 180, 190")]
         public global::System.Drawing.Color CpuColor {
             get {
                 return ((global::System.Drawing.Color)(this["CpuColor"]));
@@ -181,6 +181,7 @@ namespace SystemLoadTracker.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("61, 181, 107")]
         public global::System.Drawing.Color GpuColor {
             get {
                 return ((global::System.Drawing.Color)(this["GpuColor"]));
