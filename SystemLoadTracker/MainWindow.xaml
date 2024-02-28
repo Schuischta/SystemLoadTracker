@@ -92,6 +92,15 @@
             <Label x:Name="labelRAM" Content="0,0 GB" Canvas.Left="73" Canvas.Top="166" Height="20" Width="54" Foreground="{DynamicResource TextColor}" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" FontSize="14"/>
             <Label x:Name="labelGPUtemp" Content="0°C" Canvas.Left="224" Canvas.Top="124" Height="20" Width="40" Foreground="{DynamicResource TextColor}" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,0,0,0" FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <Label x:Name="labelVRAM" Content="0,0 GB" Canvas.Left="217" Canvas.Top="166" Height="20" Width="54" Foreground="{DynamicResource TextColor}" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,0,0,0" FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="settingsButton" Content="&#xE713;" Canvas.Left="272" Foreground="{DynamicResource TextColor}" Height="22" Width="22" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontFamily="Segoe Fluent Icons" Padding="5,5,5,5" VerticalContentAlignment="Center" Canvas.Top="22" Visibility="Hidden">
+                <Label.Style>
+                    <Style TargetType="Label">
+                        <EventSetter Event="MouseEnter" Handler="settingsButton_MouseEnter"/>
+                        <EventSetter Event="MouseLeave" Handler="settingsButton_MouseLeave"/>
+                        <EventSetter Event="MouseDown"  Handler="settingsButton_MouseDown"/>
+                    </Style>
+                </Label.Style>
+            </Label>
             <Border x:Name="mainWindowBorder" BorderThickness="2,2,2,2" Height="196" Width="294" CornerRadius="6" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
                 <Border.RenderTransform>
                     <TransformGroup>
@@ -129,15 +138,7 @@
             </Border>
 
 
-            <Label x:Name="settingsButton" Content="&#xE713;" Canvas.Left="272" Foreground="{DynamicResource TextColor}" Height="22" Width="22" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontFamily="Segoe Fluent Icons" Padding="5,5,5,5" VerticalContentAlignment="Center" Canvas.Top="22" Visibility="Hidden">
-                <Label.Style>
-                    <Style TargetType="Label">
-                        <EventSetter Event="MouseEnter" Handler="settingsButton_MouseEnter"/>
-                        <EventSetter Event="MouseLeave" Handler="settingsButton_MouseLeave"/>
-                        <EventSetter Event="MouseDown"  Handler="settingsButton_MouseDown"/>
-                    </Style>
-                </Label.Style>
-            </Label>
+            
             <Label x:Name="labelCPUloadPercent" Content="%" Canvas.Left="10" Canvas.Top="89" Height="34" Width="40" Foreground="{DynamicResource TextColor}" FontWeight="Bold" HorizontalContentAlignment="Center" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             <Label x:Name="labelGPUloadPercent" Content="%" Canvas.Left="154" Canvas.Top="89" Height="34" Width="40" Foreground="{DynamicResource TextColor}" FontWeight="Bold" HorizontalContentAlignment="Center" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             <Label x:Name="labelCPUwatts" Content="0,0 W" Canvas.Left="59" Canvas.Top="73" Height="20" Width="56" Foreground="{DynamicResource TextColor}" Padding="0,0,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>

@@ -61,7 +61,8 @@ namespace SystemLoadTracker
             this.Topmost = Properties.Settings.Default.AlwaysOnTop;
 
             // Set ShowBorder based on the saved setting
-            ToggleMainWindowBorder(Properties.Settings.Default.ShowMainWindowBorder);
+            double cornerRadius = Properties.Settings.Default.MainWindowCornerRadius;
+            ToggleMainWindowBorder(Properties.Settings.Default.ShowMainWindowBorder, cornerRadius);
 
             SetCornerRadius(Properties.Settings.Default.MainWindowCornerRadius);
 
@@ -543,25 +544,26 @@ namespace SystemLoadTracker
         }
 
         // Toggles the visibility of the main window border
-        public void ToggleMainWindowBorder(bool showBorder)
+        public void ToggleMainWindowBorder(bool showBorder, double cornerRadius)
         {
             mainWindowBorder.Visibility = showBorder ? Visibility.Visible : Visibility.Collapsed;
+
+            if (mainWindowBorder.Visibility == Visibility.Collapsed)
+            {
+                mainWindowCorner.CornerRadius = new CornerRadius(cornerRadius);
+            }
+            else
+            {
+                mainWindowCorner.CornerRadius = new CornerRadius(cornerRadius + 4);
+            }
+
             Properties.Settings.Default.ShowMainWindowBorder = showBorder;
             Properties.Settings.Default.Save();
         }
 
         public void SetCornerRadius(double cornerRadius)
         {
-            if
-                (mainWindowBorder.Visibility == Visibility.Visible)
-            {
-                mainWindowCorner.CornerRadius = new CornerRadius(cornerRadius +4);
-            }
-            else
-            {
-                mainWindowCorner.CornerRadius = new CornerRadius(cornerRadius);
-            }
-
+            
             mainWindowBorder.CornerRadius = new CornerRadius(cornerRadius);
             closeButtonBorder.CornerRadius = new CornerRadius(0, cornerRadius, 0, 0);
         }

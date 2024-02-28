@@ -165,7 +165,8 @@ namespace SystemLoadTracker
         private void showBorderCheckbox_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var showBorder = !Properties.Settings.Default.ShowMainWindowBorder;
-            mainWindow.ToggleMainWindowBorder(showBorder);
+            var cornerRadius = Properties.Settings.Default.MainWindowCornerRadius;
+            mainWindow.ToggleMainWindowBorder(showBorder, cornerRadius);
 
             showBorderCheckbox.Content = showBorder ? IconCode : "";
         }
@@ -178,6 +179,15 @@ namespace SystemLoadTracker
                 mainWindow.SetCornerRadius(newCornerRadius);
                 settingsWindowCorner.CornerRadius = new CornerRadius(newCornerRadius);
                 closeButtonBorder.CornerRadius = new CornerRadius(0, newCornerRadius, 0, 0);
+
+                if (mainWindow.mainWindowBorder.Visibility == Visibility.Visible)
+                {
+                    mainWindow.mainWindowCorner.CornerRadius = new CornerRadius(newCornerRadius + 4);
+                }
+                else
+                {
+                    mainWindow.mainWindowCorner.CornerRadius = new CornerRadius(newCornerRadius);
+                }
             }
             Properties.Settings.Default.SettingsWindowCornerRadius = newCornerRadius;
             Properties.Settings.Default.MainWindowCornerRadius = newCornerRadius;
