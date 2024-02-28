@@ -552,10 +552,17 @@ namespace SystemLoadTracker
 
         public void SetCornerRadius(double cornerRadius)
         {
-            // Setzen Sie den Corner Radius für die gewünschten Elemente
-            mainWindowCorner.CornerRadius = new CornerRadius(cornerRadius +4);
-            mainWindowBorder.CornerRadius = new CornerRadius(cornerRadius);
+            if
+                (mainWindowBorder.Visibility == Visibility.Visible)
+            {
+                mainWindowCorner.CornerRadius = new CornerRadius(cornerRadius +4);
+            }
+            else
+            {
+                mainWindowCorner.CornerRadius = new CornerRadius(cornerRadius);
+            }
 
+            mainWindowBorder.CornerRadius = new CornerRadius(cornerRadius);
             closeButtonBorder.CornerRadius = new CornerRadius(0, cornerRadius, 0, 0);
         }
 
