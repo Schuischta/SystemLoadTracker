@@ -312,6 +312,10 @@ namespace SystemLoadTracker
         {
             System.Windows.Forms.ColorDialog colorDialog = new System.Windows.Forms.ColorDialog();
 
+            // Laden Sie die zuletzt ausgewählte Farbe
+            System.Drawing.Color lastColor = Properties.Settings.Default.CpuColor;
+            colorDialog.Color = lastColor;
+
             if (colorDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 System.Drawing.Color winFormsColor = colorDialog.Color;
@@ -329,6 +333,7 @@ namespace SystemLoadTracker
 
                 System.Drawing.Color colorToSave = System.Drawing.Color.FromArgb(wpfColor.A, wpfColor.R, wpfColor.G, wpfColor.B);
 
+                // Speichern Sie die ausgewählte Farbe
                 Properties.Settings.Default.CpuColor = colorToSave;
                 Properties.Settings.Default.Save();
             }
@@ -337,6 +342,10 @@ namespace SystemLoadTracker
         private void GpuColor_MouseDown(object sender, MouseButtonEventArgs e)
         {
             System.Windows.Forms.ColorDialog colorDialog = new System.Windows.Forms.ColorDialog();
+
+            // Laden Sie die zuletzt ausgewählte Farbe
+            System.Drawing.Color lastColor = Properties.Settings.Default.GpuColor;
+            colorDialog.Color = lastColor;
 
             if (colorDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -355,6 +364,7 @@ namespace SystemLoadTracker
 
                 System.Drawing.Color colorToSave = System.Drawing.Color.FromArgb(wpfColor.A, wpfColor.R, wpfColor.G, wpfColor.B);
 
+                // Speichern Sie die ausgewählte Farbe
                 Properties.Settings.Default.GpuColor = colorToSave;
                 Properties.Settings.Default.Save();
             }
